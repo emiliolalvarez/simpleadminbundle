@@ -1,0 +1,7 @@
+simple_admin_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: SimpleAdminBundle:Default:index }
+
+_default:
+    pattern:  /
+    defaults: { _controller: SimpleAdminBundle:Default:default }
