@@ -6,7 +6,6 @@ function initializeDesktop(){
     $("#desktop").css("width",($(window).width()-(document.all ?0:0))+"px");
     $("#desktop").css("height",($(window).height()-(document.all?0:0))+"px");
     $("#desktop,body").css("overflow","hidden");
-    $("body").css("background","#ffffff url(../images/admin/wallpapers/gray-background.jpg) repeat-x left top");
     clockInterval = setInterval("setDesktopClock()",1000);
     $("#desktop").bind("click",function(event){
         var btnTop = $(".button.start").offset().top;
