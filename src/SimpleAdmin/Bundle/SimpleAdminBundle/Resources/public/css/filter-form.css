@@ -1,0 +1,92 @@
+fieldset.multipleSelector{
+	position:relative;
+	top:8px;
+	margin: 5px 0 5px 0;
+	min-height: 20px;
+	height: auto!important;
+	height: 20px;
+    padding:15px;
+    clear: both;
+	border:solid 1px #ffffff;
+	text-align: left;
+}
+
+fieldset.multipleSelector legend {
+	position:relative;
+	cursor:pointer;
+	padding-left: 20px;
+	font-weight:normal;
+	background: #efefef url("../images/admin/icon-gray-add.png") no-repeat 3px 2px;
+	margin: 0;
+
+}
+fieldset.multipleSelector legend span{
+font-weight: bold;
+
+}
+fieldset.multipleSelector legend span,fieldset.multipleSelector legend img{
+	float: left;
+}
+
+fieldset.multipleSelector ul{
+	list-style-type: none;
+	margin-top: 5px;
+}
+
+fieldset.multipleSelector ul li{
+	cursor: pointer;
+	text-align: left;
+	padding: 3px 6px;
+	margin-bottom: 4px;
+	background-color:#CCCCCC;
+}
+fieldset.multipleSelector ul li table{
+	width:98%;
+}
+fieldset.multipleSelector ul li .desc{
+	width:97%;
+}
+
+fieldset.multipleSelector ul li .drop{
+	width:3%;
+}
+.filter_search_buttons{
+	margin-top: 5px;
+}
+.filter_search_results{
+	height: 425px;
+	overflow: auto;
+	margin:0 5px;
+}
+.filter_search_results ul{
+	list-style-type: none;
+}
+.filter_search_results li{
+	margin:0px 0px 5px 0px;
+	padding: 4px 4px 4px 4px;
+	height: 22px;
+	
+}
+
+.filter_search_results li.column_titles {
+	height:15px;
+	margin:0;
+	padding:0 0 4px 0;
+}
+
+.filter-search-items .disabled .row-description table tr td{
+	text-decoration: line-through;
+}
+.filterItem .lng-flag{
+	background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px;
+}
+.filterItem select{
+   width:120px!important;
+}
+
+.filterItem input{
+
+   margin-left: 3px;
+}

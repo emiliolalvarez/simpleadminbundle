@@ -1,0 +1,83 @@
+/*AJAX PRODUCT INTERVALS*/
+.ajax_interval .no-lang-form-fields-content{
+	width:auto!important;
+}
+.ajax_interval .field-box{
+	padding-top: 0px!important;
+	padding-top: 0px;
+}
+.ajax_interval .field-box.text-type{
+	width: 30px!important;
+	margin-bottom: 0px!important;
+	margin-bottom: 0px!important;
+}
+
+.ajax_interval .ajax_form_box{
+	padding-top: 2px;
+}
+
+.ajax_interval .drop_form{
+	float: left;
+	width: 20px!important;
+	margin-top:14px;
+	margin-left:5px;
+	clear:none!important;
+	background: none;
+}
+.ajax_interval .drop_form td{
+	padding-top:0px!important;
+	padding-top:0px;
+}
+.ajax_interval .drop_form span{
+	display:none;
+}
+.ajax_interval .ajax_form,.ajax_interval .ajax_form.row2{
+	margin: 0px!important;
+	padding: 0px!important;
+	margin: 0px;
+	padding: 0px;
+} 
+
+.ajax_size{
+	float:left;
+	width:65%;
+	clear:none!important;
+}
+.ajax_size table {
+	margin-top:0px!important;
+}
+.ajax_size .add_ajax_item{
+	position: relative;
+	margin-top:10px!important;
+}
+.ajax_size .add_ajax_item span{
+	display:none;
+} 
+.ajax_size .add_ajax_item .links{
+	position:absolute;
+	top:9px;
+	right:3px;
+}
+
+.ajax_size .field-box.text-type{
+	width: 60px!important;
+	margin-bottom: 0px!important;
+	margin-bottom: 0px!important;
+}
+.ajax_size .drop_form{
+	float: left;
+	width: 20px!important;
+	margin-top:14px!important;
+	margin-left:5px;
+	clear:none!important;
+	background: none;
+}
+.ajax_size .simple-relation-box{
+	margin-top:0px!important;
+	margin-bottom:0px!important;
+}
+/*END OF AJAX PRODUCT INTERVALS*/
+
+#popup_1_1 .field-box {
+	width:100%;
+}

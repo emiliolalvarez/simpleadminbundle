@@ -1,0 +1,517 @@
+form img{
+	border:none;
+}
+.ui-datepicker{
+	z-index: 10004;
+}
+b.ui-state-active{
+	font-size: 10px;
+	margin-bottom: 3px;
+	width: 100%;
+	float: left;
+}
+
+form input,form select{
+	font-size: 11px!important;
+	border: 1px solid #8b8b8b;
+	color:#8b8b8b;
+}
+form input[type='text']{
+	height: 15px;
+	padding-top:2px;
+	color:#8b8b8b;
+}
+form input[type='button']{
+	padding: 2px;
+	text-transform: capitalize;
+	font-size: 11px;
+	width: 90px;
+}
+.ui-tabs-nav li a{
+	font-size: 11px;
+	line-height: 15px;
+}
+.no-lang-form-fields-content{
+	width: 99%;
+	float: left;
+	/*margin-top:10px;*/
+}
+.field-box{
+	padding-top: 10px;
+	text-align: left;
+	float: left;
+	color:#8b8b8b;
+}
+.field-box.text-type {
+	float:left;
+	width: 120px;
+	margin-right: 20px;
+	margin-bottom:10px;
+	color:#8b8b8b;
+}
+.field-box.time-type{
+	width: 120px;
+	margin-right: 10px;
+}
+.field-box.checkbox-type{
+	clear:both;
+	color:#8b8b8b;
+	width:100%;
+}
+.field-box.htmlarea-type{
+	clear:both;
+	width:100%;
+}
+.field-box.htmlarea-type .mceLayout{
+	width:100%!important;
+	width:100%;
+}
+.field-box.checkbox-type input{
+	float:left;
+	margin-right:5px;
+	color:#8b8b8b!important;
+}
+
+.field-box.textarea-type{
+	width: 100%;
+}
+.field-box.textarea-type textarea{
+	width: 100%;
+    height:100px!important;
+}
+.field-box.password-type{
+	width: 200px;
+}
+.field-box.date-type{
+	width:120px;
+}
+.field-box.date-type span{
+	width:100%;
+	float:left;
+}
+.field-box.date-type input,.field-box.date-type img{
+	float:left;
+}
+.field-box-lng{
+	text-align: left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+.field-box-lng textarea,.field-box-lng input[type='text']{
+    width:100%;
+}
+.field-box-lng textarea{
+    height:100px!important;
+}
+
+.ui-tabs{
+	float: left;
+	clear: both;
+	width: 98%;
+	margin-top: 20px;
+
+}
+.ui-tabs-nav,.ui-tabs-nav .ui-state-active,.ui-tabs-nav .ui-state-default{
+    position:static!important;
+}
+#ui-datepicker-div{
+	top:0px;
+}
+
+textarea.mceEditor{
+    width:100%;
+}
+.mceEditor.mceLayout{
+    width:100%!important;
+}
+
+.input{
+    border: 1px solid #8b8b8b;
+    min-height:15px;
+    height:auto!important;
+    height: 15px;
+	color:#8b8b8b;
+}
+
+/*******************SIMPLE RELATIONS**********************/
+.simple-relation-box{
+	float: left;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color:#8b8b8b;
+}
+.simple-relation-box.wide{
+	width: 100%;
+}
+.simple-relation-box .selector{
+	float: left;
+	text-align: left;
+	margin-right: 10px;
+        
+}
+.simple-relation-box .selector select{
+	min-width: 120px;
+	width: auto!important;
+	width:120px;
+	height: 19px!important;
+	line-height: 19px;
+	color:#8b8b8b;
+}
+
+.simple-relation-box .filter-form{
+	float: left;
+	clear: both;
+}
+
+.simple-relation-box .filter-form .filter-form-input{
+ 	float: left;
+        text-align:left;
+        margin-right:10px;
+}
+
+.simple-relation-box .filter-form .filter-form-input .input{
+	margin-right: 5px;
+	min-width: 120px;
+	width: auto!important;
+	width:116px;
+}
+
+.simple-relation-box .filter-form .icon-filter,
+.filter_search_buttons .icon-filter{
+	margin:2px 5px 0 0;
+}
+
+.simple-relation-box .filter-form .icon-clear,
+.filter_search_buttons .icon-clear {
+	margin-top: 3px;
+	
+}
+.simple-relation-box .read-only{
+	float: left;
+	margin-right: 10px;
+	text-align: left;
+}
+
+/****************END OF SIMPLE RELATIONS*******************/
+
+/*******************AJAX FORM*************************/
+.ajax_legend b{
+	padding: 3px;
+}
+.ajax_fieldset{
+	/*border:1px solid #CCC;*/
+	margin: 0px;
+	padding:0px;
+	width:100%!important;
+	float: left;
+	text-align: center;
+	display: none;
+}
+.ajax_fieldset fieldset{
+		width: 100%!important;
+		
+}
+
+.ajax_fieldset legend a{
+	text-decoration:none;
+	color:#000;
+}
+.ajax_form{
+	/*border:1px dashed #d7d7d7; */
+    width:48.7%;
+    /*padding:10px 15px 10px 10px;*/
+    padding:10px 0px;
+    
+	margin:0px;
+	text-align: center;
+	float:left;
+}
+.ajax_form_box{
+	width: 95%;
+	margin: 0 auto;
+	
+}
+.ajax_form_conteiner{
+	width: 100%;
+}
+
+.ajax_toggle_switch{
+	text-decoration: none;
+	color:#748F80;
+	background-image:url(../images/admin/icon-gray-arrow-down.png);
+	background-repeat:no-repeat;
+	height: 16px;
+	width: 14px;
+	cursor:pointer;
+	margin: 5px 0 0 5px;
+	
+}
+
+.drop_form {
+	clear:both;
+	width:100%!important;
+	color:#8b8b8b;
+	background: transparent url(../images/admin/pop_window_title_underline.gif) repeat-x left top;
+	margin-top: 20px;
+	text-align:left;
+}
+.drop_form .drop_icon_column{
+	padding-top:11px;
+	text-align: left;
+}
+
+.add_ajax_item {
+	position:relative;
+	width:100%;
+	text-align:right;
+	margin:33px 5px 0 0;
+	font-size:11px;
+}
+
+.add_ajax_item span {
+	position:relative;
+	bottom:2px;
+	left:1px;
+}
+
+.add_ajax_item a,
+.add_ajax_item a:hover {
+	text-decoration:none;
+	color:#8b8b8b;
+}
+
+/**********************END OF AJAX FORM***********************/
+
+/********************IMAGE AND FILE FORMS**********************/
+
+.image-box,.file-box{
+	width:99%; 
+	margin-top:10px;
+	
+}
+.image-box{
+	clear: both;
+}
+.imageFieldset,.fileFieldset{
+	margin-top: 12px;
+	height: auto!important;
+	min-height: 30px;
+	height: 30px;
+	border:none;
+	text-align:left;
+	/*background-color:#FFFFFF;*/
+}
+
+.imageFieldset legend,.fileFieldset legend {
+	
+	cursor: pointer;
+	background-color: #efefef;
+	width:100%;
+	float:left;
+	
+}
+
+.imageFieldset legend a,.fileFieldset legend a {
+	margin: 4px 0 5px 0px;
+	text-decoration:none;
+	color:#8b8b8b;
+	
+	background: #efefef url(../images/admin/icon-gray-add.png) left center no-repeat;
+	padding-left: 15px;
+}
+
+.imageFieldset legend a span,.fileFieldset legend a span {
+	color:#88b3df;
+}
+
+.imageFieldset ul,.fileFieldset ul{
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	background-color:#FFFFFF;
+	width:100%;
+}
+
+.imageFieldset ul li,.fileFieldset ul li {
+	text-align:left;
+	padding: 5px;
+	float:left;
+}
+
+.imageFieldset ul li td,.fileFieldset ul li td{
+	vertical-align:bottom;
+}
+
+.imageFieldset ul li img,.fileFieldset ul li img{
+	padding: 0 5px 5px 5px;
+	background-color:#FFFFFF;
+}
+
+.item_edition_box{
+	width:400px;
+	padding: 20px 20px 30px 20px;
+	background-color: #FFF;
+	float: left;
+}
+
+.item_edition_box .actions{
+	position:absolute;
+	bottom:3px;
+	right:15px
+}
+
+.item_edition_options{
+}
+
+.item_edition_options textarea{
+	height: 100px;
+}
+
+.item_edition_options tr td{
+	text-align: left;
+}
+/********************END OF IMAGE FORM**********************/
+
+/**********************PROPERTIES TABLE***************************/
+.properties_form{
+}
+
+.properties_form .flags{
+}
+
+.properties_form .flags td{
+	padding:3px;
+	background-color:#F1F1F1;
+	text-align: center;
+}
+.properties_form .item td{
+	background-color:#FFFFFF;
+	text-align: center;
+	padding: 3px;
+}
+.properties_form .item.ui-sortable-helper{
+	
+}
+.properties_form .item td input{
+	
+}
+
+.properties_table{
+	width:100%;
+	float:left;
+}
+.properties_table .properties_table_options{
+	min-width: 150px;
+	width: auto!important;
+	width: 150px;
+}
+.properties_table fieldset{
+	margin-top: 12px;
+	height: auto!important;
+	min-height: 30px;
+	height: 30px;
+	border:none;
+	text-align:left;
+}
+.properties_table .properties_table_tabs{
+	margin-top: 5px;
+}
+
+/********************END OF PROPERTIES TABLE**********************/
+
+
+/******************FORMULARIO DE PROPIEDADES*****************/
+.propertiesForm{
+	text-align:left;
+    float: left;
+    clear: both;
+    width:99%;
+}
+.propertiesForm fieldset{
+	margin-top:20px;
+    border: 1px solid #FFFFFF;
+}
+.propertiesForm fieldset ul{
+	list-style-type: none; 
+	padding:10px;
+	margin: 10px;
+}
+.propertiesForm legend {
+   margin-left: 10px;
+}
+.propertiesForm legend a{
+	text-decoration:none;
+	color:#8B8B8B;
+    background-image: url("../images/admin/icon-gray-add.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px;
+}
+.propertiesBox{
+   padding: 10px;
+}
+
+/******************FIN FORMULARIO DE PROPIEDADES*****************/
+
+
+
+/******************TABLA DE PROPIEDADES*****************/
+#properties{
+	text-align:left; 
+	margin-top:20px
+}
+#properties fieldset{
+	border: 1px solid #D4D2C6;
+	width:96%!important;
+	width:97%;	
+	padding:0px 5px!important;
+	padding:5px;
+}
+#properties fieldset input{
+	width:98%;
+	float: right;
+	
+}
+#properties .property_table{
+	width:99%; 
+	padding:0px; 
+	margin:0px; 
+	margin-top:10px; 
+	margin-bottom:15px;
+	text-align:left;
+}
+#properties .property_table .property_name_head{
+	width: auto;
+	font-weight: bold;
+	border-bottom: 1px dashed #A8A69E;
+}
+#properties .property_table .property_value_head{
+	width: 340px;
+	font-weight: bold;
+	border-bottom: 1px dashed #A8A69E;
+	border-left: 1px dashed #A8A69E;
+	padding-left: 10px;
+}
+#properties .property_table .property_value{
+	border-left: 1px dashed #A8A69E;
+	padding-left: 10px;
+}
+
+
+/**************FIN DE TABLA DE PROPIEDADES**************/
+
+/*************UPLOADERS********************************/
+.uploadFile{
+   background-color: #EFEFEF;
+}
+
+/*******************BULLETIN******************************/
+.bulletin_fieldset{
+	width: 99%;
+	border:1px solid #A8A69E;
+}
+.bulletin_fieldset legend{
+	text-align: left;
+	margin-left: 15px;
+}
+

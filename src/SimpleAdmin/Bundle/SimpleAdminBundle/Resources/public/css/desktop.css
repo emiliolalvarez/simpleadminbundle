@@ -1,0 +1,308 @@
+/*GENERAL*/
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:#454545;
+}
+/*END OF GENERAL*/
+/*LOGIN */
+#login_box{
+	width: 240px;
+	
+	background-color: #E7E7E7;
+	padding:20px;
+}
+
+#login_box dl dt{
+	text-align: center
+}
+#login_box dl dt span{
+	color: #666666;
+}
+
+#login_box dl dt span{
+	display:block;
+	font-family: Verdana,Arial,sans-serif,FreeSans; 
+	font-size: 11px;
+	text-align: left;
+	margin-left:auto;    
+	margin-right: auto;
+	width: 220px;
+	
+
+}
+
+#login_box dl dd{
+	text-align: center; 
+}
+
+#login_box dl dd input{
+	width: 220px;
+	height:16px;
+	line-height:14px;
+	font-size:11px;
+	border: 1px solid #CCC;
+	color: #7E7E7E;
+	margin-left:auto;    
+	margin-right: auto;
+	padding-top: 2px;
+}
+#login_box dl .spacer{
+	margin: 0px 0px 10px 0px;
+	padding: 0px;
+}
+#login_box #btnLogin{
+	
+	width: 62px;
+	height: 20px;
+	right: 10px;
+	cursor:pointer;
+}
+
+#login_box #btnLogin.es{
+   background: url(../images/admin/icon_go_es.png) no-repeat top left;
+}
+#login_box #btnLogin.en{
+   background: url(../images/admin/icon_go_en.png) no-repeat top left;
+}
+#login_box #msg_box{
+	font-family: Verdana,Arial,sans-serif,FreeSans;
+	font-size:10px;
+	color:red; 
+	height: 16px;
+	width: 200px;
+	left: 10px;
+	top:5px;
+	cursor:pointer;
+	text-align: left;
+}
+/*END OF LOGIN*/
+
+/*MENU*/
+#menu_box{
+	width: 100%;
+	background-color: #232D34;
+	height: 25px;
+}
+/*END OF MENU*/
+
+/*DESKTOP*/
+#desktop{
+	position:relative;
+	overflow: hidden;
+}
+#desktop_bottom_bar{
+	position:absolute;
+	bottom:13px;
+	left:0px;
+	height: 40px;
+	width: 98%;
+	margin:0 1%;
+	background: #b9b9b9 url(../images/admin/bottom_bar_background.jpg) repeat-x left top;
+	/*border-top: 2px solid #B6B3AC;*/
+}
+#desktop_bottom_bar #desktop_bottom_bar_content{
+	/*border-top:   1px solid #FFFFFF;*/
+	height:40px;
+}
+#desktop_bottom_bar #desktop_bottom_bar_content #task_bar{
+	float: left;
+	margin-left: 30px;
+	padding-top:5px;
+	height: 40px;
+	/*width: 70%;*/
+	width: auto;
+	overflow: hidden;
+}
+
+
+.button{
+	float:left;
+	cursor:pointer;
+	margin-left:-5px;
+	
+}
+.button.start{
+	height: 40px;
+	width:115px;
+	background: url(../images/admin/menu_display_button.gif) no-repeat left top;
+}
+.button.start .button_text {
+	position:relative;
+	width:55px;
+	height:17px;
+	left:30px;
+	top:12px;
+	background: url(../images/admin/menu_display_text.jpg) no-repeat left top;
+	text-indent:-9000em;
+	overflow:hidden;
+	border:none;
+}
+
+.button .button_text {
+	left:30px;
+	top:12px;
+	padding-left: 22px;
+	padding-right: 5px;	
+	border-right: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	height: 20px;
+}
+
+.button .button_text span{
+	/*padding-left: 22px;
+	padding-right: 5px;*/
+	border:none;
+}
+
+.button.taskbar_item{
+	margin: 7px 8px 2px 2px;
+	height:21px;
+	padding-top:5px;
+	background: #787878 url(../images/admin/taskbar_item_center.gif) repeat-x left top;
+}
+
+#desktop_bottom_bar #desktop_bottom_bar_content #task_bar .taskbar_button {
+	margin:2px 6px 0 0;
+	background: #787878 url(../images/admin/taskbar_item_center.gif) repeat-x left top;
+	cursor:pointer;
+}
+
+#desktop_bottom_bar #desktop_bottom_bar_content #task_bar .taskbar_button .button_text {
+	border:none;
+	padding:5px 5px;
+	overflow:hidden;
+}
+#desktop_bottom_bar #desktop_bottom_bar_content #task_bar .taskbar_button .button_text span{
+	/*background: url(../images/admin/icon_application.png) no-repeat 3px 1px;*/
+	font-weight: normal;
+	color:#FFFFFF;
+	font-size:11px;
+}
+
+#desktop_bottom_bar #desktop_bottom_bar_content #task_bar .taskbar_button.active .button_text span{
+	font-weight: normal;
+	color:#FFFFFF;
+	font-size:11px;
+}
+
+#desktop_bottom_bar #clock{
+	/*font-size:12px;
+	line-height:21px;
+	height: 21px;
+	margin:2px 2px 2px 0px;
+	width:100px;
+	float: right;
+	text-align: center;
+	border-left: 1px solid #808080;
+	border-top: 1px solid #808080;
+	border-right: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
+	color:#000;*/
+	display:none;
+}
+
+#desktop_bottom_bar .version {
+	float:right;
+	width:200px;
+	color:#FFFFFF;
+	margin:12px 12px 0 8px;
+	
+}
+
+#desktop_bottom_bar #btn_logout{
+	float: right;
+	height: 40px;
+	width: 50px;
+	/*padding: 2px;*/
+	background: url(../images/admin/logout.gif) no-repeat center center;
+	/*margin: 3px 5px 0px 0px;*/
+	margin-right: -5px;
+	cursor: pointer;
+}
+
+.cancelar_aceptar { 
+	margin-top:20px;
+	padding-top:10px;
+	background: transparent url(../images/admin/pop_window_title_underline.gif) repeat-x left top;
+
+}
+
+.cancelar_aceptar div { 
+	background: transparent url(../images/admin/btn_cancelar.gif) no-repeat left top;
+	color:#8b8b8b;
+	border:none;
+	width:67px;
+	height:20px;
+	margin: 0 5px 0 0;
+	
+}
+
+.cancelar_aceptar div div.button_text {
+	background:none;
+	width:67px;
+	text-align:center;
+}
+
+.cancelar_aceptar div.button_text { 
+	width:50px;
+	border:none;
+	padding:0;
+	width:auto;
+	height:auto;
+	margin-top:3px;
+}
+
+.logout_form{
+	width:400px; 
+	background-color: #999999;
+	border: 1px solid #000;
+	padding:10px;
+}
+
+.logout_form .logout_icon{
+	padding: 10px;
+}
+
+.logout_form .logout_message{
+	font-size: 14px;
+	font-weight:bold;
+	color:#FFFFFF;
+	padding:15px 10px 10px 10px;
+}
+
+.logout_form .btns {
+	margin:11px 8px 0 0;
+	background: none;
+}
+
+.logout_form .btns div {
+	width:44px;
+	height:26px;
+	background:transparent url(../images/admin/logout_btn_background.gif) no-repeat left top;
+	margin-left:8px;
+}
+
+.logout_form .btns div span {
+	position:relative;
+	font-size:16px;
+	color:#FFFFFF;
+	top:3px;
+}
+
+.wait_message{
+	width:150px;
+	height: 70px;
+	line-height: 70px;
+	padding-left:65px;
+	background: #FFFFFF url(../images/admin/ajax-loader.gif) no-repeat 15px center;
+	border:1px solid #CCCCCC;
+	z-index: 10003;
+}
+
+.wait_message .msg{
+	font-size:14px;
+	font-style:italic;
+}
+
+/*END OF DESKTOP*/
