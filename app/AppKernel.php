@@ -23,6 +23,9 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Sp\BowerBundle\SpBowerBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new SimpleAdmin\Bundle\SimpleAdminBundle\SimpleAdminBundle()
         );
 

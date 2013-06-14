@@ -5,3 +5,7 @@ simple_admin_homepage:
 _default:
     pattern:  /
     defaults: { _controller: SimpleAdminBundle:Default:default }
+
+default:
+    resource: "@SimpleAdminBundle/Controller/DefaultController.php"
+    type:     annotation

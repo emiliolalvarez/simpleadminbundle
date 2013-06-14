@@ -27,7 +27,6 @@
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-
     <script type="text/javascript">
         $(document).ready(function(){
             initializeDesktop();
@@ -49,6 +48,8 @@
                 <li>Item1</li>
                 <li>Item2</li>
             </ul>
+            {{ "hello world!" | trans }}
+            {{ path('api_get_info_test_rest',{}) }}
             <div id="desktop_bottom_bar">
                 <div id="desktop_bottom_bar_content">
                     <div class="button start" ><div class="button_text"><span>{{ "Start" | trans }}</span></div></div>

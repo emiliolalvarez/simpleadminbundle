@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -29,13 +29,15 @@ assetic:
     use_controller: false
     bundles:
       - SimpleAdminBundle
-    #java: /usr/bin/java
+    java: /usr/bin/java
     filters:
         cssrewrite: ~
         #closure:
         #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
-        #yui_css:
-        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+        yui_css:
+          jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+        yui_css:
+          jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
 
 # Doctrine Configuration
 doctrine:
@@ -47,13 +49,45 @@ doctrine:
         user:     %database_user%
         password: %database_password%
         charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
-        auto_mapping: true
         metadata_cache_driver: apc
         result_cache_driver: apc
         query_cache_driver: apc
+        auto_mapping: true
+        mappings:
+            SonataMediaBundle: ~
+
+sonata_media:
+    default_context: default
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                small: { width: 60,  height: 60,  quality: 70}
+                big:   { width: 150, height: 150, quality: 70}
+
+    cdn:
+        server:
+            path: /uploads/media # http://media.sonata-project.org/
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false
+
+    providers:
+            image:
+                resizer: sonata.media.resizer.square
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -63,9 +97,31 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+#fos_rest:
+#    format_listener:
+#        default_priorities: [html, 'json', '*/*']
+
 fos_rest:
+    param_fetcher_listener: true
+    body_listener:
+      decoders:
+        json: fos_rest.decoder.json
+        xml: fos_rest.decoder.xml
     format_listener:
-        default_priorities: [html, 'json', '*/*']
+      default_priorities: [json, xml, html, */*]
+      fallback_format: json
+    view:
+        view_response_listener: force
+
+sensio_framework_extra:
+    view:    { annotations: false }
+    router:  { annotations: true }
+    request: { converters: true }
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: SimpleAdmin\Bundle\SimpleAdminBundle\Entity\User
 
 sp_bower:
     bundles:
