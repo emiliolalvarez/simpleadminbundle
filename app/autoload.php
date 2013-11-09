@@ -11,6 +11,8 @@ if (!function_exists('intl_get_error_code')) {
     $loader->add('', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs');
 }
 
+$loader->add("Application", __DIR__);
+
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
 return $loader;

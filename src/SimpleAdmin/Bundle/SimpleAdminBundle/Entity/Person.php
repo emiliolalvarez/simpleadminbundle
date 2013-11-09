@@ -27,4 +27,39 @@ Class Person{
      * @ORM\Column(type="string")
      */
     protected $lastName;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Media", cascade={"persist","remove"}, orphanRemoval=true)
+     */
+    protected $photo;
+
+    public function setName($name){
+        $this->name = $name;
+    }
+
+    public function getName(){
+        return $this->name;
+    }
+
+    public function setLastName($lastName){
+        $this->lastName = $lastName;
+    }
+
+    public function getLastName(){
+        return $this->lastName;
+    }
+
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function getId(){
+        return $this->getId();
+    }
 }

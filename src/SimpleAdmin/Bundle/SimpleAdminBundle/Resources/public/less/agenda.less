@@ -1,0 +1,43 @@
+@import '../components/bootstrap/less/bootstrap.less';
+@font-face {
+  font-family: "Sleepy Time";
+  src: url('../fonts/dk_sleepy_time.otf');
+}
+.agenda{
+  padding: 30px;
+  .pages{
+    width: 796px;
+    height: 548px;
+    border: 1px solid #e6e6e6;
+    margin-bottom: 10px;
+    .clearfix();
+    .page{
+      width: 397px;
+      height: 548px;
+      float: left;
+      font-family: 'Sleepy Time' ;
+      .month{
+        margin: 40px 0px 30px 0px;
+        text-align: center;
+        font-size: 38px;
+        text-transform: uppercase;
+      }
+      .day{
+        padding-top: 40px;
+        text-align: center;
+        font-size: 16px;
+        text-transform: uppercase;
+        background: url('../images/agenda-birds2.png') transparent top center no-repeat;
+      }
+
+    }
+    .page.left{
+      border-right: 1px solid #e6e6e6 ;
+    }
+    .page.right{
+      .day{
+        background: url('../images/agenda-birds.png') transparent top center no-repeat;
+      }
+    }
+  }
+}

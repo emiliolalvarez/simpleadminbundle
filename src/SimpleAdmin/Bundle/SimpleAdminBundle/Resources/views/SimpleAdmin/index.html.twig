@@ -9,14 +9,13 @@
         'bundles/simpleadmin/components/bootstrap/less/bootstrap.less'
         'bundles/simpleadmin/css/desktop.css'
         'bundles/simpleadmin/css/styleMenu.css'
-
         filter='cssrewrite'
         %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
         {% endstylesheets %}
     {% endblock %}
 
-    {% javascripts
+    {#{% javascripts
     'bundles/simpleadmin/components/jquery/jquery.min.js'
     'bundles/simpleadmin/components/angular/angular.min.js'
     'bundles/simpleadmin/js/center/jquery.center.js'
@@ -25,7 +24,12 @@
     'bundles/simpleadmin/js/misc.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {% endjavascripts %}#}
+
+    <script
+            data-main="{{ asset('bundles/simpleadmin/js/main.js') | slice(0, -3) }}"
+            src="{{ asset('bundles/simpleadmin/js/require.js') }}">
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -48,7 +52,6 @@
                 <li>Item1</li>
                 <li>Item2</li>
             </ul>
-            {{ "hello world!" | trans }}
             {{ path('api_get_info_test_rest',{}) }}
             <div id="desktop_bottom_bar">
                 <div id="desktop_bottom_bar_content">

@@ -18,8 +18,6 @@ class TestRestController extends Controller{
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getInfoTestRestAction(Request $request){
-        #$content = json_encode(array('name'=>'John Doe', 'age'=>35));
-        #return new Response($content) ;
         $user = new \SimpleAdmin\Bundle\SimpleAdminBundle\Entity\User();
         $user->setEmail('test@test.com');
         return $user;

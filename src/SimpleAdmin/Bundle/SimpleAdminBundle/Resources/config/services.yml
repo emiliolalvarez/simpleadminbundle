@@ -5,3 +5,6 @@ services:
 #    simple_admin.example:
 #        class: %simple_admin.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+     fpdf:
+        class: SimpleAdmin\Bundle\SimpleAdminBundle\Service\FPDF
+        arguments: ['L','pt']

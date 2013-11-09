@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @SimpleAdminBundle/Resources/config/admin.yml }
 
 framework:
     #esi:             ~
@@ -58,12 +59,14 @@ doctrine:
         result_cache_driver: apc
         query_cache_driver: apc
         auto_mapping: true
-        mappings:
-            SonataMediaBundle: ~
 
 sonata_media:
     default_context: default
     db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    class:
+        media:              SimpleAdmin\Bundle\SimpleAdminBundle\Entity\Media
+        gallery:            SimpleAdmin\Bundle\SimpleAdminBundle\Entity\Gallery
+        gallery_has_media:  SimpleAdmin\Bundle\SimpleAdminBundle\Entity\GalleryHasMedia
     contexts:
         default:  # the default context is mandatory
             providers:
@@ -74,6 +77,7 @@ sonata_media:
 
             formats:
                 small: { width: 60,  height: 60,  quality: 70}
+                medium: { width: 95,  height: 95,  quality: 70}
                 big:   { width: 150, height: 150, quality: 70}
 
     cdn:
@@ -89,6 +93,34 @@ sonata_media:
             image:
                 resizer: sonata.media.resizer.square
 
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+        sonata.block.service.text:
+        sonata.block.service.rss:
+
+# app/config/config.yml
+sonata_admin:
+    title:      Sonata Project
+    title_logo: /bundles/sonataadmin/logo_title.png
+    templates:
+        # default global templates
+        layout:  SonataAdminBundle::standard_layout.html.twig
+        ajax:    SonataAdminBundle::ajax_layout.html.twig
+
+        # default actions templates, should extend a global templates
+        list:    SonataAdminBundle:CRUD:list.html.twig
+        show:    SonataAdminBundle:CRUD:show.html.twig
+        edit:    SonataAdminBundle:CRUD:edit.html.twig
+
+    dashboard:
+        blocks:
+            # display a dashboard block
+            - { position: left, type: sonata.admin.block.admin_list }
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
@@ -97,10 +129,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-#fos_rest:
-#    format_listener:
-#        default_priorities: [html, 'json', '*/*']
-
 fos_rest:
     param_fetcher_listener: true
     body_listener:
@@ -108,10 +136,13 @@ fos_rest:
         json: fos_rest.decoder.json
         xml: fos_rest.decoder.xml
     format_listener:
-      default_priorities: [json, xml, html, */*]
-      fallback_format: json
+      rules:
+        - { path: '^/api/', priorities: [ 'json'], fallback_format 'json', prefer_extension: false }
+        - { path: '^/', priorities: ['html','*/*'], fallback_format: 'html', prefer_extension: false }
+
     view:
-        view_response_listener: force
+      view_response_listener: force
+      default_engine:         twig
 
 sensio_framework_extra:
     view:    { annotations: false }
@@ -122,9 +153,3 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: SimpleAdmin\Bundle\SimpleAdminBundle\Entity\User
-
-sp_bower:
-    bundles:
-        SimpleAdminBundle:
-          config_dir: Resources/config/bower # Can be relative to the bundles root directory, absolute or a bundle notation
-          asset_dir: Resources/public/components # Can be relative to the config_dir directory, absolute or a bundle notation

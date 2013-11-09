@@ -1,0 +1,6 @@
+services:
+    simple_admin.admin.person:
+        class: SimpleAdmin\Bundle\SimpleAdminBundle\Admin\PersonAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: my_group, label: "Person" }
+        arguments: [null,SimpleAdmin\Bundle\SimpleAdminBundle\Entity\Person,null]

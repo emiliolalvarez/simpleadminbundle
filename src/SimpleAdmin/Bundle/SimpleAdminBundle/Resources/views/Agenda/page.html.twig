@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Simple Admin</title>
+
+    {% block stylesheets %}
+        {% stylesheets
+        'bundles/simpleadmin/components/bootstrap/less/bootstrap.less'
+        'bundles/simpleadmin/css/desktop.css'
+        'bundles/simpleadmin/css/styleMenu.css'
+        'bundles/simpleadmin/less/agenda.less'
+        filter='cssrewrite'
+        %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+        {% endstylesheets %}
+    {% endblock %}
+
+    {% javascripts
+    'bundles/simpleadmin/components/jquery/jquery.min.js'
+    'bundles/simpleadmin/components/angular/angular.min.js'
+    'bundles/simpleadmin/js/center/jquery.center.js'
+    'bundles/simpleadmin/js/simpleMenu/simple-menu.js'
+    'bundles/simpleadmin/js/desktop.js'
+    'bundles/simpleadmin/js/misc.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.image-carousel').each(function(){
+                var _self = $(this);
+                $(this).html('<div class="image-carousel-wrapper">'+$(this).html()+'</div>');
+                $(this).find('.image-carousel-wrapper').css('position','relative')
+                $(this).find('.image-carousel-wrapper').css('width',$(this).find('img:first').width()+ 'px');
+                $(this).find('.image-carousel-wrapper').css('height',$(this).find('img:first').height()+ 'px');
+                $(this).find('img').css("opacity",0).css('zIndex',0).css('position','absolute').css('top',0).css('left',0);
+                $(this).find('img:first').addClass('image-carousel-active').css('zIndex',1).css("opacity",1);
+                $(this).find('.image-carousel-wrapper').css('overflow','hidden');
+                var interval = $(this).data('imageInterval') != null?$(this).data('imageInterval')*1000:5000;
+                window.setInterval(function(){
+                    var current = _self.find('.image-carousel-active');
+                    current.fadeTo(Math.round(interval/2),0,function(){
+                        $(this).css('zIndex',0);
+                    });
+                    var next = current.next(current[0].tagName).length?current.next(current[0].tagName):current.prev(current[0].tagName);
+                    next.parents('.image-carouselwrapper').css('height',next.css('height')+'px');
+                    next.parents('.image-carousel-wrapper').css('width',next.css('width')+'px');
+                    next.css('zIndex',1).fadeTo(Math.round(interval/2),1,function(){
+                        current.removeClass('image-carousel-active');
+                        $(this).addClass('image-carousel-active');
+                    });
+
+                },interval);
+            });
+        });
+    </script>
+</head>
+{% macro calendar_page(column,month,day_buffer,idx) %}
+    <div class="page {{ column }}">
+        <div class="month">{{ month }}</div>
+        <div class="day">{{ day_buffer[idx].name ~ ' ' ~ day_buffer[idx].number  }}</div>
+    </div>
+{% endmacro %}
+{% import _self as utils %}
+<body>
+    Agenda generada!
+    <div class="image-carousel" data-image-interval="7">
+        <img src="{{ asset('bundles/simpleadmin/images/flag_es.png') }}" />
+        <img src="{{ asset('bundles/simpleadmin/images/flag_en.png') }}" />
+        <img src="{{ asset('bundles/simpleadmin/images/flag_fr.png') }}" />
+
+    </div>
+
+    <div class="image-carousel" data-image-interval="7">
+        <img src="{{ asset('bundles/simpleadmin/images/agenda-birds.png') }}" />
+        <img src="{{ asset('bundles/simpleadmin/images/agenda-birds2.png') }}" />
+        <img src="{{ asset('bundles/simpleadmin/images/agenda-birds.png') }}" />
+        <img src="{{ asset('bundles/simpleadmin/images/agenda-birds2.png') }}" />
+    </div>
+</body>
+</html>
