@@ -601,7 +601,7 @@ $_SERVER['HTTP_'.$key] = implode(', ', $value);
 }
 }
 $request = array('g'=> $_GET,'p'=> $_POST,'c'=> $_COOKIE);
-$requestOrder = ini_get('request_order') ?: ini_get('variable_order');
+$requestOrder = ini_get('request_order') ?: ini_get('variables_order');
 $requestOrder = preg_replace('#[^cgp]#','', strtolower($requestOrder)) ?:'gp';
 $_REQUEST = array();
 foreach (str_split($requestOrder) as $order) {
@@ -1264,7 +1264,7 @@ $headers->set('Content-Type', $mimeType);
 $charset = $this->charset ?:'UTF-8';
 if (!$headers->has('Content-Type')) {
 $headers->set('Content-Type','text/html; charset='.$charset);
-} elseif (0 === strpos($headers->get('Content-Type'),'text/') && false === strpos($headers->get('Content-Type'),'charset')) {
+} elseif (0 === stripos($headers->get('Content-Type'),'text/') && false === stripos($headers->get('Content-Type'),'charset')) {
 $headers->set('Content-Type', $headers->get('Content-Type').'; charset='.$charset);
 }
 if ($headers->has('Transfer-Encoding')) {
@@ -2136,11 +2136,11 @@ protected $booted;
 protected $name;
 protected $startTime;
 protected $errorReportingLevel;
-const VERSION ='2.2.9';
-const VERSION_ID ='20209';
+const VERSION ='2.2.11';
+const VERSION_ID ='20211';
 const MAJOR_VERSION ='2';
 const MINOR_VERSION ='2';
-const RELEASE_VERSION ='9';
+const RELEASE_VERSION ='11';
 const EXTRA_VERSION ='';
 public function __construct($environment, $debug)
 {
@@ -2368,7 +2368,8 @@ $directChildren[$parentName] = $name;
 $topMostBundles[$name] = $bundle;
 }
 }
-if (count($diff = array_values(array_diff(array_keys($directChildren), array_keys($this->bundles))))) {
+if (!empty($directChildren) && count($diff = array_diff_key($directChildren, $this->bundles))) {
+$diff = array_keys($diff);
 throw new \LogicException(sprintf('Bundle "%s" extends bundle "%s", which is not registered.', $directChildren[$diff[0]], $diff[0]));
 }
 $this->bundleMap = array();

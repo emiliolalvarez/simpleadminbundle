@@ -19,6 +19,34 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('simple_admin');
+        $rootNode
+            ->children()
+                ->arrayNode('manage')
+                    ->isRequired()
+                    ->children()
+                        ->arrayNode('entities')
+                            #->requiresAtLeastOneElement()
+                            /*->prototype('scalar')
+                                ->defaultValue(array())
+                            ->end()*/
+                            ->prototype('array')
+                                ->children()
+                                    ->scalarNode('name')->defaultValue('')->end()
+                                    ->scalarNode('entity')->defaultValue('')->end()
+                                    ->arrayNode('children')
+                                        ->prototype('array')
+                                            ->children()
+                                                ->scalarNode('name')->defaultValue('')->end()
+                                                ->scalarNode('entity')->defaultValue('')->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
@@ -26,4 +54,6 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
+
+
 }

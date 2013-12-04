@@ -1,0 +1,182 @@
+/*GENERAL*/
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color:#454545;
+}
+.wrapper{
+  .content{
+    .desktop{
+      position:relative;
+      overflow: hidden;
+      .desktop_bottom_bar{
+        position:absolute;
+        bottom:13px;
+        left:0px;
+        height: 40px;
+        width: 98%;
+        margin:0 1%;
+        background: #b9b9b9 url(../images/admin/bottom_bar_background.jpg) repeat-x left top;
+        .desktop_bottom_bar_content{
+          height:40px;
+          .task_bar{
+            float: left;
+            margin-left: 30px;
+            padding-top:5px;
+            height: 40px;
+            /*width: 70%;*/
+            width: auto;
+            overflow: hidden;
+            .button.taskbar_item{
+              margin: 7px 8px 2px 2px;
+              height:21px;
+              padding-top:5px;
+              background: #787878 url(../images/admin/taskbar_item_center.gif) repeat-x left top;
+            }
+            .taskbar_button {
+              margin:2px 6px 0 0;
+              background: #787878 url(../images/admin/taskbar_item_center.gif) repeat-x left top;
+              cursor:pointer;
+            }
+            .taskbar_button .button_text {
+              border:none;
+              padding:5px 5px;
+              overflow:hidden;
+            }
+            .taskbar_button .button_text span{
+              /*background: url(../images/admin/icon_application.png) no-repeat 3px 1px;*/
+              font-weight: normal;
+              color:#FFFFFF;
+              font-size:11px;
+            }
+
+          }
+          .version {
+            float:right;
+            width:200px;
+            color:#FFFFFF;
+            margin:12px 12px 0 8px;
+
+          }
+          .clock{
+            /*font-size:12px;
+            line-height:21px;
+            height: 21px;
+            margin:2px 2px 2px 0px;
+            width:100px;
+            float: right;
+            text-align: center;
+            border-left: 1px solid #808080;
+            border-top: 1px solid #808080;
+            border-right: 1px solid #FFF;
+            border-bottom: 1px solid #FFF;
+            color:#000;*/
+            display:none;
+          }
+
+          .button{
+            float:left;
+            cursor:pointer;
+            margin-left:-5px;
+
+          }
+
+          .button {
+            .button_text span{
+              /*padding-left: 22px;
+              padding-right: 5px;*/
+              border:none;
+            }
+          }
+
+          .button.start{
+            height: 40px;
+            width:115px;
+            background: url(../images/admin/menu_display_button.gif) no-repeat left top;
+          }
+
+          .button.start{
+            .button_text{
+              position:relative;
+              width:55px;
+              height:17px;
+              left:30px;
+              top:12px;
+              background: url(../images/admin/menu_display_text.jpg) no-repeat left top;
+              text-indent:-9000em;
+              overflow:hidden;
+              border:none;
+            }
+          }
+          .button .button_text {
+            left:30px;
+            top:12px;
+            padding-left: 22px;
+            padding-right: 5px;
+            border-right: 1px solid #808080;
+            border-bottom: 1px solid #808080;
+            height: 20px;
+          }
+          .btn_logout{
+            float: right;
+            height: 40px;
+            width: 50px;
+            background: url(../images/admin/logout.gif) no-repeat center center;
+            margin-right: -5px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+/*END OF GENERAL*/
+
+.cancelar_aceptar {
+  margin-top:20px;
+  padding-top:10px;
+  background: transparent url(../images/admin/pop_window_title_underline.gif) repeat-x left top;
+
+}
+
+.cancelar_aceptar div {
+  background: transparent url(../images/admin/btn_cancelar.gif) no-repeat left top;
+  color:#8b8b8b;
+  border:none;
+  width:67px;
+  height:20px;
+  margin: 0 5px 0 0;
+
+}
+
+.cancelar_aceptar div div.button_text {
+  background:none;
+  width:67px;
+  text-align:center;
+}
+
+.cancelar_aceptar div.button_text {
+  width:50px;
+  border:none;
+  padding:0;
+  width:auto;
+  height:auto;
+  margin-top:3px;
+}
+
+
+
+.wait_message{
+  width:150px;
+  height: 70px;
+  line-height: 70px;
+  padding-left:65px;
+  background: #FFFFFF url(../images/admin/ajax-loader.gif) no-repeat 15px center;
+  border:1px solid #CCCCCC;
+  z-index: 10003;
+}
+
+.wait_message .msg{
+  font-size:14px;
+  font-style:italic;
+}

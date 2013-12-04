@@ -17,6 +17,8 @@ class DefaultController extends Controller
      */
     public function indexAction($name)
     {
+        $em = $this->getDoctrine();
+        $userRepository = $em->getRepository("SimpleAdminBundle:Person");
         ob_start();
         phpinfo(INFO_MODULES);
         $phpinfo = ob_get_contents();

@@ -1,3 +1,8 @@
 SimpleAdminBundle_api_test_rest:
     type:     rest
     resource: SimpleAdmin\Bundle\SimpleAdminBundle\APIController\TestRestController
+
+SimpleAdminBundle_api_management:
+    type:     rest
+    resource: SimpleAdmin\Bundle\SimpleAdminBundle\APIController\ManagementController
+

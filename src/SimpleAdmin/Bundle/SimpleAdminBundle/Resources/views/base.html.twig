@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Simple Admin</title>
+
+        {% block stylesheets %}
+            {% stylesheets
+            'bundles/simpleadmin/components/bootstrap/less/bootstrap.less'
+            'bundles/simpleadmin/components/angular-ui/build/angular-ui.css'
+            'bundles/simpleadmin/less/desktop.less'
+            'bundles/simpleadmin/less/login.less'
+            'bundles/simpleadmin/less/side-menu.less'
+            'bundles/simpleadmin/less/window.less'
+            filter='cssrewrite'
+            %}
+            <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+            {% endstylesheets %}
+        {% endblock stylesheets%}
+
+        {% block javascripts %}
+            {% javascripts
+            'bundles/simpleadmin/components/jquery/jquery.min.js'
+            'bundles/simpleadmin/js/angular/angular.js'
+            'bundles/simpleadmin/js/angular/angular-route.js'
+            'bundles/simpleadmin/js/angular/angular-resource.js'
+            'bundles/simpleadmin/js/angular/angular-sanitize.js'
+            'bundles/simpleadmin/components/angular-ui/build/angular-ui.js'
+            'bundles/simpleadmin/js/angular/app.js'
+            'bundles/simpleadmin/js/angular/filters.js'
+            'bundles/simpleadmin/js/angular/directives.js'
+            'bundles/simpleadmin/js/angular/controllers.js'
+            'bundles/simpleadmin/js/angular/models.js'
+            'bundles/simpleadmin/js/jquery.center.js'
+            'bundles/simpleadmin/js/simple-menu.js'
+            'bundles/simpleadmin/js/desktop.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+            <script type="text/javascript">
+                angular.element(document).ready(function() {
+                    console.log('angularjs ready!');
+                    angular.bootstrap(document, ['simpleadminApp']);
+                });
+                $(document).ready(function(){
+                    initializeDesktop();
+                    $(window).bind("resize",function(){
+                        initializeDesktop();
+                    });
+                    $("#btn_logout").bind("click",function(){
+                        logout();
+                    });
+                });
+            </script>
+        {% endblock javascripts %}
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="content">
+                <div class="desktop" ng-controller="DesktopController" ng-init="init();" >
+                    {% include 'SimpleAdminBundle:SimpleAdmin:block/menu.html.twig' %}
+                    {% block content %}{% endblock content %}
+                    {% include 'SimpleAdminBundle:SimpleAdmin:block/main-bar.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

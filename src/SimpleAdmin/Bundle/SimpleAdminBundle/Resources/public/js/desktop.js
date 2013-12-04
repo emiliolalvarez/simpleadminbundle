@@ -3,11 +3,11 @@ var clockInterval=null;
 function initializeDesktop(){
     clearInterval(clockInterval);
     setDesktopClock();
-    $("#desktop").css("width",($(window).width()-(document.all ?0:0))+"px");
-    $("#desktop").css("height",($(window).height()-(document.all?0:0))+"px");
-    $("#desktop,body").css("overflow","hidden");
+    $(".desktop").css("width",($(window).width()-(document.all ?0:0))+"px");
+    $(".desktop").css("height",($(window).height()-(document.all?0:0))+"px");
+    $(".desktop,body").css("overflow","hidden");
     clockInterval = setInterval("setDesktopClock()",1000);
-    $("#desktop").bind("click",function(event){
+    $(".desktop").bind("click",function(event){
         var btnTop = $(".button.start").offset().top;
         var btnLeft = $(".button.start").offset().left;
         var btnH = $(".button.start").outerHeight();
@@ -267,12 +267,12 @@ function createSectionWindow(section_id,id,parent_value){
             success: function(data){
                 var callback = function(section_id,template,data,id,parent_value){
                     var margin = 9000;
-                    $("#desktop").append(template);
+                    $(".desktop").append(template);
                     $(window_id).css("marginLeft","-"+margin+"px");
                     $(window_id+" .pop-window-content-inner-box").html(data);
 
                     $(window_id).draggable({
-                        containment: '#desktop',
+                        containment: '.desktop',
                         scroll: false,
                         handle:'.pop-window-title',
                         start:function(event,ui){
@@ -333,7 +333,7 @@ function createSectionWindow(section_id,id,parent_value){
                                 $(window_id).data("top", $(window_id).offset().top);
                                 $(window_id).data("left",$(window_id).offset().left);
                                 $(window_id).css("width","100%");
-                                $(window_id).css("height",$("#desktop").height() - $("#desktop_bootom_bar").outerHeight());
+                                $(window_id).css("height",$(".desktop").height() - $(".desktop_bootom_bar").outerHeight());
                                 $(window_id).css("top","0px");
                                 $(window_id).css("left","0px");
                                 resizeWindowContent($(window_id).attr("id"),$(window_id).width(),$(window_id).height());

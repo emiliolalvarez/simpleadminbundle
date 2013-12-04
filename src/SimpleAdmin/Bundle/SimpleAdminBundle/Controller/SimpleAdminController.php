@@ -12,10 +12,11 @@ class SimpleAdminController extends Controller
 {
     /**
      * @Route("/simpleadmin")
+     * @Template()
      */
     public function indexAction()
     {
-        return $this->render("SimpleAdminBundle:Default:index.html.twig",array("test"=>1));
+        #return $this->render("SimpleAdminBundle:Default:index.html.twig",array("test"=>1));
         return array();
     }
 

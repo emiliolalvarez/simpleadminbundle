@@ -21,7 +21,7 @@ class SimpleAdminExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
+        $container->setParameter('simple_admin.manage', $config['manage']);
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

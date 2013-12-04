@@ -137,7 +137,7 @@ fos_rest:
         xml: fos_rest.decoder.xml
     format_listener:
       rules:
-        - { path: '^/api/', priorities: [ 'json'], fallback_format 'json', prefer_extension: false }
+        - { path: '^/api/', priorities: [ 'json','xml'], fallback_format 'json', prefer_extension: false }
         - { path: '^/', priorities: ['html','*/*'], fallback_format: 'html', prefer_extension: false }
 
     view:
@@ -153,3 +153,31 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: SimpleAdmin\Bundle\SimpleAdminBundle\Entity\User
+
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+fos_js_routing:
+    routes_to_expose: [ api_get_managed_entities, api_get_listing_window ]
+
+jms_di_extra:
+    locations:
+        all_bundles: true
+        bundles: [SimpleAdminBundle]
+        directories: ["%kernel.root_dir%/../src","%kernel.root_dir%/../src/SimpleAdmin/Bundle/SimpleAdminBundle/Listener"]
+
+
+simple_admin:
+    manage:
+      entities:
+        - {name: 'Person', entity: 'SimpleAdminBundle:Person'}
+        - {name: 'User', entity: 'SimpleAdminBundle:User'}
+        - {name: 'Nested Test', children: [{name: 'User', entity: 'SimpleAdminBundle:User'}]}
