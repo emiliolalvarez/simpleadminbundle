@@ -53,7 +53,7 @@ angular.module('simpleadmin.models', ['ngResource'])
                 {
                     listing: {
                         method: "GET",
-                        isArray: true,
+                        isArray: false,
                         params: {
                             verb: 'listing',
                             page: '@page'

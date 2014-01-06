@@ -46,6 +46,7 @@ class SerializationListener implements EventSubscriberInterface
         $context = $event->getContext();
         $visitor = $event->getVisitor();
 
+        $r = $visitor->getResult();
         if ('SimpleAdmin\Bundle\SimpleAdminBundle\Entity\Media' == $type['name']){
             $photo = array();
 

@@ -4,6 +4,6 @@ _default:
 
 SimpleAdminBundle:
     resource: "@SimpleAdminBundle/Controller"
-    prefix:   /
+    prefix:   /simpleadmin
     type: annotation
 

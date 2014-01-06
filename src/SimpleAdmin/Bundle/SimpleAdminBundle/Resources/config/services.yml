@@ -8,8 +8,3 @@ services:
      fpdf:
         class: SimpleAdmin\Bundle\SimpleAdminBundle\Service\FPDF
         arguments: ['L','pt']
-
-#     simpleadmin.listener.serializationlistener:
-#        class: SimpleAdmin\SimpleAdminBundle\Listener\SerializationListener
-#        tags:
-#            - { name: jms_serializer.event_subscriber, event: serializer.pre_serialize, method: onPreSerialize }

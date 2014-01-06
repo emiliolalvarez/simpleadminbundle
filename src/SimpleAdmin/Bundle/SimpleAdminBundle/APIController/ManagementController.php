@@ -49,8 +49,10 @@ class ManagementController extends Controller{
             10
         );
 
-        return $pagination->getItems();
-
+        return array(
+          "items"=>$pagination->getItems(),
+          "extra"=>"test"
+        );
 
     }
 

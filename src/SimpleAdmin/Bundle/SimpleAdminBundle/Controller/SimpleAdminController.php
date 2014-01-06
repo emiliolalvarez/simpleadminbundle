@@ -11,12 +11,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class SimpleAdminController extends Controller
 {
     /**
-     * @Route("/simpleadmin")
+     * @Route("/")
      * @Template()
      */
     public function indexAction()
     {
         #return $this->render("SimpleAdminBundle:Default:index.html.twig",array("test"=>1));
+        return array();
+    }
+
+  /**
+   * @Route("/template/window")
+   * @Template()
+   */
+    public function windowTemplateAction(){
         return array();
     }
 

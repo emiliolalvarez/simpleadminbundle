@@ -1,5 +1,5 @@
 angular.module('simpleadmin.controllers',[])
-    .controller('DesktopController', ['$scope','$compile','$routeParams','ManagedEntity','ListingWindow', function($scope,$compile,$rootParams,ManagedEntity,ListingWindow) {
+    .controller('DesktopController', ['$scope','$compile','$routeParams','$q','$http','ManagedEntity','ListingWindow', function($scope,$compile,$rootParams,$q,$http,ManagedEntity,ListingWindow) {
 
         $scope.managedEntities = [];
 
@@ -44,7 +44,33 @@ angular.module('simpleadmin.controllers',[])
         };
 
         $scope.openListWindow = function(entry){
-            ListingWindow.listing({'repository':entry.entity,'page':1});
-            alert(entry.entity);
+            ListingWindow.listing({'repository':entry.entity,'page':1},function(data){
+                console.log(data);
+                var deferred = $q.defer();
+                $http(
+                        {
+                            method: 'GET',
+                            url: Routing.generate('simpleadmin_simpleadmin_simpleadmin_windowtemplate'),
+                            daa: '',
+                            headers: {
+                                "Accept": "text/html"
+                            }
+                        }
+                    ).success(function(data, status, headers, config) {
+                        deferred.resolve(data);
+                    }
+                );
+                deferred.promise.then(function(data){
+                    var win = $(data);
+                    win.draggable({ containment: ".desktop", scroll: false });
+                    $('.desktop').append(win);
+                    $compile(win.parent().contents())($scope);
+                })
+            });
         };
+
+        $scope.closeWindow = function (el){
+            $(el.target).parents('.pop-window').remove();
+        }
+
     }]);
