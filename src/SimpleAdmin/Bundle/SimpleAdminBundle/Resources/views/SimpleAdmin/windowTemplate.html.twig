@@ -4,13 +4,10 @@
             <div class="pop-window-title-content" >
                 <div class="pop-window-title" >
                     <div class="float_left title_box"></div>
-                    <div class="relative float_right close_maximize">
-                        <div class="float_right">
-                            <div class="close" ng-click="closeWindow($event)"></div>
-                        </div>
-                        <div class="float_right">
-                            <div class="maximize"></div>
-                        </div>
+                    <div class="clearfix float_right title-buttons">
+                        <div class="pull-right close" ng-click="closeWindow($event)"></div>
+                        <div class="pull-right maximize" ng-click="maximizeWindow($event)"></div>
+                        <div class="pull-right restore" ng-click="restoreWindow($event)"></div>
                     </div>
                 </div>
             </div>

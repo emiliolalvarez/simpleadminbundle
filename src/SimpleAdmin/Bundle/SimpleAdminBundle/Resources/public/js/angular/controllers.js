@@ -63,7 +63,6 @@ angular.module('simpleadmin.controllers',[])
                         }
                     );
                     deferred.promise.then(function(data){
-
                         var win = $(data);
                         win.attr('id',id);
                         win.draggable({ containment: ".desktop", scroll: false });
@@ -79,4 +78,23 @@ angular.module('simpleadmin.controllers',[])
             $(el.target).parents('.pop-window').remove();
         }
 
+        $scope.maximizeWindow = function(el){
+            var w = $('.desktop').width()+'px';
+            var h = ($('.desktop').height() - $('.desktop_bottom_bar').height()) +'px';
+            var win = $(el.target).parents('.pop-window');
+            win.data('restoreWidth',win.width()+'px');
+            win.data('restoreHeight',win.height()+'px');
+            win.css('width',w);
+            win.css('height',h);
+            win.find('.resotre').show();
+            win.find('.maximize').hide();
+        }
+
+        $scope.restoreWindow = function(el){
+            var win = $(el.target).parents('.pop-window');
+            win.css('width',win.data('restoreWidth'));
+            win.css('height',win.data('restoreHeight'));
+            win.find('.resotre').hide();
+            win.find('.maximize').show();
+        }
     }]);
