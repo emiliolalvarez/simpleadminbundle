@@ -44,10 +44,12 @@ angular.module('simpleadmin.controllers',[])
         };
 
         $scope.openListWindow = function(entry){
-            ListingWindow.listing({'repository':entry.entity,'page':1},function(data){
-                console.log(data);
-                var deferred = $q.defer();
-                $http(
+            var id = "window_list_"+entry.entity.toLowerCase().replace(/[:|\|\/]/g,"_");
+            if($("#"+id).length == 0){
+                ListingWindow.listing({'repository':entry.entity,'page':1},function(data){
+                    console.log(data);
+                    var deferred = $q.defer();
+                    $http(
                         {
                             method: 'GET',
                             url: Routing.generate('simpleadmin_simpleadmin_simpleadmin_windowtemplate'),
@@ -57,16 +59,20 @@ angular.module('simpleadmin.controllers',[])
                             }
                         }
                     ).success(function(data, status, headers, config) {
-                        deferred.resolve(data);
-                    }
-                );
-                deferred.promise.then(function(data){
-                    var win = $(data);
-                    win.draggable({ containment: ".desktop", scroll: false });
-                    $('.desktop').append(win);
-                    $compile(win.parent().contents())($scope);
-                })
-            });
+                            deferred.resolve(data);
+                        }
+                    );
+                    deferred.promise.then(function(data){
+
+                        var win = $(data);
+                        win.attr('id',id);
+                        win.draggable({ containment: ".desktop", scroll: false });
+                        win.resizable();
+                        $('.desktop').append(win);
+                        $compile(win.contents())($scope);
+                    })
+                });
+            }
         };
 
         $scope.closeWindow = function (el){
