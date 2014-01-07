@@ -3,6 +3,8 @@ angular.module('simpleadmin.controllers',[])
 
         $scope.managedEntities = [];
 
+        $scope.listingWindows = [];
+
         $scope.testVar = "test var 1";
 
         $scope.setTestVar = function(text) {
@@ -67,26 +69,39 @@ angular.module('simpleadmin.controllers',[])
                         win.attr('id',id);
                         win.draggable({ containment: ".desktop", scroll: false });
                         win.resizable();
+                        $scope.renderList(win,entry);
                         $('.desktop').append(win);
                         $compile(win.contents())($scope);
+                        console.log(entry);
                     })
                 });
             }
         };
 
+        $scope.renderList = function(win,entry){
+            $scope.listingWindows[win.attr('id')] = entry;
+            var container = win.find('.pop-window-content-inner-box');
+            container.append('<table class="list"><thead class="listHeader"><tr><td ng-repeat="column in listingWindows[\''+win.attr('id')+'\'].columns">[[ column.alias ]]</td></tr></thead></table>');
+
+        };
+
         $scope.closeWindow = function (el){
             $(el.target).parents('.pop-window').remove();
-        }
+        };
 
         $scope.maximizeWindow = function(el){
-            var w = $('.desktop').width()+'px';
-            var h = ($('.desktop').height() - $('.desktop_bottom_bar').height()) +'px';
             var win = $(el.target).parents('.pop-window');
+            var w = ($('.desktop').innerWidth() - parseInt(win.css('paddingLeft')) - parseInt(win.css('paddingRight')) )+'px';
+            var h = ($('.desktop').innerHeight() - parseInt(win.css('paddingTop')) - parseInt(win.css('paddingBottom')) - $('.desktop_bottom_bar').height()) +'px';
             win.data('restoreWidth',win.width()+'px');
             win.data('restoreHeight',win.height()+'px');
+            win.data('restoreTop',win.css('top'));
+            win.data('restoreLeft',win.css('left'));
             win.css('width',w);
             win.css('height',h);
-            win.find('.resotre').show();
+            win.css('top',0);
+            win.css('left',0);
+            win.find('.restore').show();
             win.find('.maximize').hide();
         }
 
@@ -94,7 +109,9 @@ angular.module('simpleadmin.controllers',[])
             var win = $(el.target).parents('.pop-window');
             win.css('width',win.data('restoreWidth'));
             win.css('height',win.data('restoreHeight'));
-            win.find('.resotre').hide();
+            win.css('top',win.data('restoreTop'));
+            win.css('left',win.data('restoreLeft'));
+            win.find('.restore').hide();
             win.find('.maximize').show();
-        }
+        };
     }]);
