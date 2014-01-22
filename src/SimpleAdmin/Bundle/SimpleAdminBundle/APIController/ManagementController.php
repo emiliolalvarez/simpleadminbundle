@@ -46,11 +46,15 @@ class ManagementController extends Controller{
         $pagination = $paginator->paginate(
             $query,
             $this->get('request')->query->get('page', 1),
-            10
+            1
         );
 
         return array(
           "items"=>$pagination->getItems(),
+          "total"=>$pagination->getTotalItemCount(),
+          "pageSize"=>$pagination->getItemNumberPerPage(),
+          "currentPage"=>$pagination->getCurrentPageNumber(),
+          "totalPages"=> ceil($pagination->getTotalItemCount()/$pagination->getItemNumberPerPage()),
           "extra"=>"test"
         );
 

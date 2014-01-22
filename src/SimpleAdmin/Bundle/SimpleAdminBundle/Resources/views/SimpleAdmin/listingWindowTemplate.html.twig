@@ -1,0 +1,22 @@
+{% extends "SimpleAdminBundle::SimpleAdmin/windowTemplate.html.twig" %}
+{% block window_content %}
+    <table class="list">
+        <thead class="listHeader">
+            <tr>
+                <td ng-repeat="column in listingWindows['{{  windowId }}'].metadata.columns">[[ column.alias ]]</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in listingWindows['{{ windowId }}'].data.items">
+                <td ng-repeat="column in listingWindows['{{ windowId }}'].metadata.columns">[[item[column.field] ]]</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pager clearfix">
+        <div class="pull-left">{{ "Page" | trans }}:</div>
+        {% for page in 1..totalPages %}
+                <span ng-show="listingWindows['{{ windowId }}'].currentPage=={{ page }}" class="page pull-left selected">{{ page }}</span>
+                <a ng-hide="listingWindows['{{ windowId }}'].currentPage=={{ page }}" class="page pull-left" href="javascript:void(0);" ng-click="changeListingPage({{ page }},'{{ windowId }}')">{{ page }}</a>
+        {% endfor %}
+    </div>
+{% endblock window_content %}

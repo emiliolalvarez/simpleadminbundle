@@ -54,35 +54,45 @@ angular.module('simpleadmin.controllers',[])
                     $http(
                         {
                             method: 'GET',
-                            url: Routing.generate('simpleadmin_simpleadmin_simpleadmin_windowtemplate'),
-                            daa: '',
+                            url: Routing.generate('simpleadmin_simpleadmin_simpleadmin_listingwindowtemplate'),
+                            params: {'windowId':id,'totalPages':data.totalPages,'currentPage':data.currentPage},
+                            data: '',
                             headers: {
                                 "Accept": "text/html"
                             }
                         }
-                    ).success(function(data, status, headers, config) {
-                            deferred.resolve(data);
+                    ).success(function(template, status, headers, config) {
+                            deferred.resolve(template);
                         }
                     );
-                    deferred.promise.then(function(data){
-                        var win = $(data);
-                        win.attr('id',id);
-                        win.draggable({ containment: ".desktop", scroll: false });
-                        win.resizable();
-                        $scope.renderList(win,entry);
-                        $('.desktop').append(win);
-                        $compile(win.contents())($scope);
-                        console.log(entry);
+                    deferred.promise.then(function(template){
+                        $scope.renderList(template,id,entry,data);
                     })
                 });
             }
         };
 
-        $scope.renderList = function(win,entry){
-            $scope.listingWindows[win.attr('id')] = entry;
+        $scope.renderPage = function(win,data){
             var container = win.find('.pop-window-content-inner-box');
-            container.append('<table class="list"><thead class="listHeader"><tr><td ng-repeat="column in listingWindows[\''+win.attr('id')+'\'].columns">[[ column.alias ]]</td></tr></thead></table>');
+        };
 
+        $scope.renderList = function(template,id,entry,data){
+            var win = $(template);
+            win.attr('id',id);
+            win.draggable({ containment: ".desktop", scroll: false });
+            win.resizable();
+            $scope.listingWindows[win.attr('id')] = {'metadata': entry, 'data': data, 'currentPage': 1 };
+            $('.desktop').append(win);
+            $compile(win.contents())($scope);
+            console.log(entry);
+        };
+
+        $scope.changeListingPage=function(page,windowId){
+            console.log("Change to page: "+page);
+            ListingWindow.listing({'repository':$scope.listingWindows[windowId].metadata.entity,'page':page},function(data){
+                $scope.listingWindows[windowId].data = data;
+                $scope.listingWindows[windowId]['currentPage'] = page;
+            });
         };
 
         $scope.closeWindow = function (el){

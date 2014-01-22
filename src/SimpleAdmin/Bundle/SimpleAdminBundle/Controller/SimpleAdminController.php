@@ -21,11 +21,17 @@ class SimpleAdminController extends Controller
     }
 
   /**
-   * @Route("/template/window")
+   * @Route("/template/window/listing")
    * @Template()
    */
-    public function windowTemplateAction(){
-        return array();
+    public function listingWindowTemplateAction(Request $request){
+
+        return array(
+          'windowId'=>$request->query->get('windowId'),
+          'totalPages'=>$request->query->get('totalPages'),
+          'currentPage'=>$request->query->get('currentPage')
+        );
+
     }
 
 }

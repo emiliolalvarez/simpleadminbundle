@@ -166,7 +166,7 @@ knp_paginator:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
 fos_js_routing:
-    routes_to_expose: [ api_get_managed_entities, api_get_listing_window, simpleadmin_simpleadmin_simpleadmin_windowtemplate]
+    routes_to_expose: [ api_get_managed_entities, api_get_listing_window, simpleadmin_simpleadmin_simpleadmin_listingwindowtemplate]
 
 jms_di_extra:
     locations:
