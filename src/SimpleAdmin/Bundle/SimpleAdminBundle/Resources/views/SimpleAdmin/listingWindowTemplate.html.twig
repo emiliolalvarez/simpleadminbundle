@@ -1,7 +1,8 @@
 {% extends "SimpleAdminBundle::SimpleAdmin/windowTemplate.html.twig" %}
+{% block window_title %}[[ listingWindows['{{  windowId }}'].metadata.name ]]{% endblock %}
 {% block window_content %}
-    <div class="filters">
-
+    <div class="filters clearfix">
+        {% include "SimpleAdminBundle::SimpleAdmin/block/listing-filter.html.twig" %}
     </div>
     <table class="list">
         <thead class="listHeader">

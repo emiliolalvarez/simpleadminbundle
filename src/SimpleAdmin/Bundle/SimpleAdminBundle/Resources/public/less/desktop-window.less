@@ -1,0 +1,121 @@
+@import "../components/bootstrap/less/bootstrap.less";
+/*POPUP WINDOW*/
+.ajax-loader{
+  background-image: url('../images/admin/ajax-loader.gif');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.pop-window{
+  width:455px;
+  height: 400px;
+  background: #efefef url(../images/admin/pop_window_top.gif) repeat-x left top;
+  border: 1px solid #d1d1d1;
+  overflow: hidden;
+  padding:7px;
+  .pager{
+    position: absolute;
+    bottom: -18px;
+    span,a{
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      margin-right: 3px;
+    }
+    .selected{
+      color: #FFFFFF;
+      background-color: #1f6377;
+    }
+    .pager-legend{
+      margin-right: 10px;
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+  .pop-window-box {
+    .pop-window-box-inner{
+      td.popup_center {
+        background-color: #efefef;
+      }
+      .pop-window-title{
+        position: relative;
+        .pop-window-title-content{
+          height:29px;
+          width:100%;
+          font-size: 12px;
+          font-weight:bold;
+          color:#8b8b8b;
+          cursor: move;
+          background: transparent url(../images/admin/pop_window_title_underline.gif) repeat-x left bottom;
+
+          .title_box{
+            width:100%;
+            margin: 2px 0 2px 0;
+            text-align:center;
+            position: relative;
+            text-align: center;
+            .title-buttons {
+              position:absolute;
+              right:5px;
+              top: 0px;
+              width:60px;
+              .restore{
+                width: 20px;
+                height: 20px;
+                background: url(../images/admin/icon_window_restore.png) no-repeat top left;
+                margin: 0 4px 0px 0px;
+                display: none;
+                cursor: pointer;
+              }
+              .maximize{
+                width: 20px;
+                height: 20px;
+                background: url(../images/admin/icon_window_maximize.png) no-repeat top left;
+                margin: 0 4px 0px 0px;
+                cursor:pointer;
+              }
+              .close{
+                width: 20px;
+                height: 20px;
+                background: url(../images/admin/icon_window_close.png) no-repeat top left;
+                margin: 0 2px 0px 0px;
+                .opacity(100);
+                cursor:pointer;
+              }
+            }
+
+          }
+        }
+      }
+      .pop-window-content{
+        float: left;
+        background-color: #efefef;
+        width: 100%;
+        .pop-window-conent-inner{
+          overflow: auto;
+          .pop-window-content-inner-box{
+            border: 1px solid red;
+            width: 100%;
+            .filters{
+              padding: 10px 0px;
+              .filter{
+                font-size: 12px;
+                span{
+                  font-size: 12px;
+                }
+                input[type="text"]{
+                  width: 100px;
+                  height: 17px;
+                  line-height: 17px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*END OF POPUP WINDOW*/

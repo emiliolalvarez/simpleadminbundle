@@ -49,7 +49,7 @@ angular.module('simpleadmin.controllers',[])
             var id = "window_list_"+entry.entity.toLowerCase().replace(/[:|\|\/]/g,"_");
             $scope.showLoader($('.desktop'));
             if($("#"+id).length == 0){
-                ListingWindow.listing({'repository':entry.entity,'filters':entry.filters?entry.filters:'','page':1},function(data){
+                ListingWindow.listing({'repository':entry.entity,'page':1},function(data){
                     console.log(data);
                     var deferred = $q.defer();
                     $http(
@@ -76,7 +76,7 @@ angular.module('simpleadmin.controllers',[])
 
         $scope.adjustWindowContent = function(windowId){
             win = $('#'+windowId);
-            var h= win.height() - win.find('.pop-window-title-content').height() - win.find('.pager').height();
+            var h= win.height() - win.find('.pop-window-title').height() - win.find('.pager').height();
             win.find('.pop-window-content').css('height',h+'px');
         };
 

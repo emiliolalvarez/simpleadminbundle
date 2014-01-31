@@ -1,0 +1,12 @@
+<div class="filter pull-left" ng-repeat="filter in listingWindows['{{ windowId }}'].metadata.filters">
+    <div ng-switch="filter.type">
+        <div ng-switch-when="textarea">
+            <span>[[ filter.label ]]</span>
+            <textarea name="filter_[[ filter.field ]]"></textarea>
+        </div>
+        <div ng-switch-default>
+            <span>[[ filter.label ]]</span>
+            <input type="text" name="filter_[[ filter.field ]]">
+        </div>
+    </div>
+</div>

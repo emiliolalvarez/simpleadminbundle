@@ -1,13 +1,15 @@
 <div class="pop-window ui-corner-all">
     <div class="pop-window-box clearfix">
         <div class="pop-window-box-inner">
-            <div class="pop-window-title-content" >
-                <div class="pop-window-title" >
-                    <div class="float_left title_box"></div>
-                    <div class="clearfix float_right title-buttons">
-                        <div class="pull-right close" ng-click="closeWindow($event)"></div>
-                        <div class="pull-right maximize" ng-click="maximizeWindow($event)"></div>
-                        <div class="pull-right restore" ng-click="restoreWindow($event)"></div>
+            <div class="pop-window-title" >
+                <div class="pop-window-title-content" >
+                    <div class="title_box">
+                        <span class="title">{% block window_title %}{% endblock %}</span>
+                        <div class="title-buttons">
+                            <div class="pull-right close" ng-click="closeWindow($event)"></div>
+                            <div class="pull-right maximize" ng-click="maximizeWindow($event)"></div>
+                            <div class="pull-right restore" ng-click="restoreWindow($event)"></div>
+                        </div>
                     </div>
                 </div>
             </div>

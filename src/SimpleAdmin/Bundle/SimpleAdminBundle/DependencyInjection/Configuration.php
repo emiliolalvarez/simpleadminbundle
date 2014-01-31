@@ -54,6 +54,7 @@ class Configuration implements ConfigurationInterface
                                         ->children()
                                           ->scalarNode('field')->defaultValue('')->end()
                                           ->scalarNode('type')->defaultValue('')->end()
+                                          ->scalarNode('label')->defaultValue('')->end()
                                           ->scalarNode('entity')->defaultValue('')->end()
                                         ->end()
                                       ->end()
