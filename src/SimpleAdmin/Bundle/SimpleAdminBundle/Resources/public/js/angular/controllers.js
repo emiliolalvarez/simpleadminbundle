@@ -47,8 +47,9 @@ angular.module('simpleadmin.controllers',[])
 
         $scope.openListWindow = function(entry){
             var id = "window_list_"+entry.entity.toLowerCase().replace(/[:|\|\/]/g,"_");
+            $scope.showLoader($('.desktop'));
             if($("#"+id).length == 0){
-                ListingWindow.listing({'repository':entry.entity,'page':1},function(data){
+                ListingWindow.listing({'repository':entry.entity,'filters':entry.filters?entry.filters:'','page':1},function(data){
                     console.log(data);
                     var deferred = $q.defer();
                     $http(
@@ -67,9 +68,16 @@ angular.module('simpleadmin.controllers',[])
                     );
                     deferred.promise.then(function(template){
                         $scope.renderList(template,id,entry,data);
+                        $scope.removeLoader($('.desktop'));
                     })
                 });
             }
+        };
+
+        $scope.adjustWindowContent = function(windowId){
+            win = $('#'+windowId);
+            var h= win.height() - win.find('.pop-window-title-content').height() - win.find('.pager').height();
+            win.find('.pop-window-content').css('height',h+'px');
         };
 
         $scope.renderPage = function(win,data){
@@ -80,18 +88,27 @@ angular.module('simpleadmin.controllers',[])
             var win = $(template);
             win.attr('id',id);
             win.draggable({ containment: ".desktop", scroll: false });
-            win.resizable();
+            win.resizable(
+                {
+                    stop:function(event){
+                        $scope.adjustWindowContent($(event.target).attr('id'));
+                    }
+                }
+            );
             $scope.listingWindows[win.attr('id')] = {'metadata': entry, 'data': data, 'currentPage': 1 };
             $('.desktop').append(win);
             $compile(win.contents())($scope);
+            $scope.adjustWindowContent(id);
             console.log(entry);
         };
 
         $scope.changeListingPage=function(page,windowId){
             console.log("Change to page: "+page);
+            $scope.showLoader($('#'+windowId+' .pop-window-content'));
             ListingWindow.listing({'repository':$scope.listingWindows[windowId].metadata.entity,'page':page},function(data){
                 $scope.listingWindows[windowId].data = data;
                 $scope.listingWindows[windowId]['currentPage'] = page;
+                $scope.removeLoader($('#'+windowId+' .pop-window-content'));
             });
         };
 
@@ -124,4 +141,17 @@ angular.module('simpleadmin.controllers',[])
             win.find('.restore').hide();
             win.find('.maximize').show();
         };
+
+        $scope.showLoader = function(el){
+            var w = el.width();
+            var h = el.height();
+            if(el.find(".ajax-loader").length==0){
+                el.prepend('<div style="position: relative"><div class="ajax-loader" style="z-index:9999;position:absolute;left:0;margin:0px;padding:0px;width:'+w+'px;height:'+h+'px; background-color: #FFFFFF;filter: alpha(opacity=60);opacity:0.6"></div></div>');
+            }
+        };
+
+        $scope.removeLoader = function(el){
+            el.find('.ajax-loader').parent().remove();
+        };
+
     }]);

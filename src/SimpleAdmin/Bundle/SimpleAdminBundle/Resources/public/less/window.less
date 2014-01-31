@@ -25,7 +25,6 @@
 	
 }
 .pop-window .pop-window-title{
-	float:left;
 	height:29px;
 	width:100%;
 	font-size: 12px;
@@ -76,7 +75,6 @@
 
 .pop-window .pop-window-content{
 	float: left;
-	padding: 5px;
 	background-color: #efefef;
     width: 100%;
 }
@@ -87,4 +85,32 @@
 .pop-window .pop-window-content-inner-box{
 	width: 100%;
 }
+.pop-window .pager{
+  position: absolute;
+  bottom: -18px;
+  span,a{
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    margin-right: 3px;
+  }
+  .selected{
+    color: #FFFFFF;
+    background-color: #1f6377;
+  }
+  .pager-legend{
+    margin-right: 10px;
+    height: 20px;
+    line-height: 20px;
+  }
+
+}
+
+.ajax-loader{
+  background-image: url('../images/admin/ajax-loader.gif');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 /*END OF POPUP WINDOW*/

@@ -1,12 +1,14 @@
 <?php
 namespace SimpleAdmin\Bundle\SimpleAdminBundle\APIController;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManager;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\Paginator;
+use Metadata\ClassMetadata;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,10 +35,12 @@ class ManagementController extends Controller{
      */
     public function getListingWindowAction(Request $request,$entityRepositoryName){
 
-        /** @var EntityManager $em */
-        $s = $this->get('simpleadmin.listener.serializationlistener');
+        /** @var Registry $em */
         $em = $this->getDoctrine();
         $repository = $em->getRepository($entityRepositoryName);
+        /** @var \Doctrine\ORM\Mapping\ClassMetadata $meta */
+        $meta = $em->getManager()->getClassMetadata($repository->getClassName());
+        $mappings = $meta->getAssociationMappings();
         $qb = $repository->createQueryBuilder('a');
         $qb->orderBy('a.id');
         $query = $qb->getQuery();
@@ -57,6 +61,10 @@ class ManagementController extends Controller{
           "totalPages"=> ceil($pagination->getTotalItemCount()/$pagination->getItemNumberPerPage()),
           "extra"=>"test"
         );
+
+    }
+
+    private function getListingFiltetrs(){
 
     }
 

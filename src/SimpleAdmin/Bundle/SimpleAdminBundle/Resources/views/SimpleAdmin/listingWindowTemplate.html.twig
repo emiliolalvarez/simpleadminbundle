@@ -1,5 +1,8 @@
 {% extends "SimpleAdminBundle::SimpleAdmin/windowTemplate.html.twig" %}
 {% block window_content %}
+    <div class="filters">
+
+    </div>
     <table class="list">
         <thead class="listHeader">
             <tr>
@@ -12,11 +15,13 @@
             </tr>
         </tbody>
     </table>
+{% endblock window_content %}
+{% block pager %}
     <div class="pager clearfix">
-        <div class="pull-left">{{ "Page" | trans }}:</div>
+        <div class="pull-left pager-legend">{{ "Page" | trans }}:</div>
         {% for page in 1..totalPages %}
-                <span ng-show="listingWindows['{{ windowId }}'].currentPage=={{ page }}" class="page pull-left selected">{{ page }}</span>
-                <a ng-hide="listingWindows['{{ windowId }}'].currentPage=={{ page }}" class="page pull-left" href="javascript:void(0);" ng-click="changeListingPage({{ page }},'{{ windowId }}')">{{ page }}</a>
+            <span ng-show="listingWindows['{{ windowId }}'].currentPage=={{ page }}" class="page pull-left selected">{{ page }}</span>
+            <a ng-hide="listingWindows['{{ windowId }}'].currentPage=={{ page }}" class="page pull-left" href="javascript:void(0);" ng-click="changeListingPage({{ page }},'{{ windowId }}')">{{ page }}</a>
         {% endfor %}
     </div>
-{% endblock window_content %}
+{% endblock %}
