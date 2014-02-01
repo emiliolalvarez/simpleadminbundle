@@ -2,11 +2,11 @@
     <div ng-switch="filter.type">
         <div ng-switch-when="textarea">
             <span>[[ filter.label ]]</span>
-            <textarea name="filter_[[ filter.field ]]"></textarea>
+            <textarea name="[[ filter.field ]]"></textarea>
         </div>
         <div ng-switch-default>
             <span>[[ filter.label ]]</span>
-            <input type="text" name="filter_[[ filter.field ]]">
+            <input type="text" name="[[ filter.field ]]">
         </div>
     </div>
 </div>

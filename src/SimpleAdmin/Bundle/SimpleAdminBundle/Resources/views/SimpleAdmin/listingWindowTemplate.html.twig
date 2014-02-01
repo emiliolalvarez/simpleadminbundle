@@ -2,7 +2,10 @@
 {% block window_title %}[[ listingWindows['{{  windowId }}'].metadata.name ]]{% endblock %}
 {% block window_content %}
     <div class="filters clearfix">
-        {% include "SimpleAdminBundle::SimpleAdmin/block/listing-filter.html.twig" %}
+        <form ng-hide="listingWindows['{{ windowId }}'].metadata.filters.length == 0" class="filter-form">
+            {% include "SimpleAdminBundle::SimpleAdmin/block/listing-filter.html.twig" %}
+            <span ng-click="changeListingPage(1,'{{ windowId }}')" type="button" class="label label-info">{{ "Filter" | trans }}</span>
+        </form>
     </div>
     <table class="list">
         <thead class="listHeader">
@@ -20,9 +23,6 @@
 {% block pager %}
     <div class="pager clearfix">
         <div class="pull-left pager-legend">{{ "Page" | trans }}:</div>
-        {% for page in 1..totalPages %}
-            <span ng-show="listingWindows['{{ windowId }}'].currentPage=={{ page }}" class="page pull-left selected">{{ page }}</span>
-            <a ng-hide="listingWindows['{{ windowId }}'].currentPage=={{ page }}" class="page pull-left" href="javascript:void(0);" ng-click="changeListingPage({{ page }},'{{ windowId }}')">{{ page }}</a>
-        {% endfor %}
+        <a ng-repeat="page in range(listingWindows['{{ windowId }}'].data.totalPages) track by $index" class="page pull-left" ng-class="{'selected': listingWindows['{{ windowId }}'].data.currentPage == ($index + 1)}" href="javascript:void(0);" ng-click="changeListingPage($index + 1,'{{ windowId }}')">[[$index + 1]]</a>
     </div>
 {% endblock %}

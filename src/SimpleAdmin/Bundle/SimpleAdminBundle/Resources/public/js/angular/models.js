@@ -56,7 +56,8 @@ angular.module('simpleadmin.models', ['ngResource'])
                         isArray: false,
                         params: {
                             verb: 'listing',
-                            page: '@page'
+                            page: '@page',
+                            filters: '@filters'
                         }
                     }
                 });
