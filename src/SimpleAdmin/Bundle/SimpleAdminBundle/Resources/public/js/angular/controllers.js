@@ -117,6 +117,11 @@ angular.module('simpleadmin.controllers',[])
             });
         };
 
+        $scope.clearFilters = function(windowId){
+            $('#'+windowId+' .filter-form').find("input[type=text], textarea, select").val("");
+            $scope.changeListingPage(1,windowId);
+        };
+
         $scope.closeWindow = function (el){
             $(el.target).parents('.pop-window').remove();
         };

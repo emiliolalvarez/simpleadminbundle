@@ -51,4 +51,26 @@ angular.module('simpleadmin.directives', [])
                 });
             }
         };
+    }).directive("ngSelectLoad", function() {
+        return {
+            restrict: "A",
+            link: function(scope, element, attrs) {
+                $(element).attr('disabled',true).css('opacity',.6);
+                $.ajax({
+                    url: Routing.getBaseUrl()+'/api/combo/values',
+                    data: {
+                        entity: scope.$eval($(element).attr('data-entity')),
+                        order: scope.$eval($(element).attr('data-order')),
+                        description: scope.$eval($(element).attr('data-description')),
+                        pk: scope.$eval($(element).attr('data-pk'))
+                    },
+                    traditional: true
+                }).done(function( data ) {
+                    $.each(data.results, function( index, obj ) {
+                        $(element).append('<option value="'+obj[data.meta.pk]+'">'+obj[data.meta.description]+'</option>');
+                    });
+                    $(element).attr('disabled',false).css('opacity',1);
+                });
+            }
+        };
     });

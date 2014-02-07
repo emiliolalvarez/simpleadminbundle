@@ -36,6 +36,12 @@ Class Person{
      */
     protected $photo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Country")
+     * @JMS\MaxDepth(1)
+     */
+    protected $country;
+
     public function setName($name){
         $this->name = $name;
     }

@@ -178,6 +178,6 @@ jms_di_extra:
 simple_admin:
     manage:
       entities:
-        - {name: 'Person', entity: 'SimpleAdminBundle:Person', columns: [{field: id, alias: id},{field: name, alias: nombre}], filters:[{field: name,type: text, label: "Name" },{field: lastName, type:text,label: "Last name"}]}
+        - {name: 'Person', entity: 'SimpleAdminBundle:Person', columns: [{field: id, alias: id},{field: name, alias: nombre}], filters:[{field: name,type: text, label: "Name" },{field: lastName, type:text,label: "Last name"},{field: country, type:select,label: "Country", entity: "SimpleAdminBundle:Country", entity_order: "name",entity_description_field: "name", entity_pk_field: "id" }]}
         - {name: 'User', entity: 'SimpleAdminBundle:User'}
         - {name: 'Nested Test', children: [{name: 'User', entity: 'SimpleAdminBundle:User'}]}

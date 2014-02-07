@@ -64,6 +64,31 @@ class ManagementController extends Controller{
 
     }
 
+    public function getComboValuesAction(Request $request){
+      $entity = $request->query->get('entity',null);
+      $results = array();
+      if(!empty($entity)){
+        $order = $request->query->get('order',"id");
+        $em = $this->getDoctrine();
+        $repository = $em->getRepository($entity);
+        /**
+         * @var QueryBuilder $qb
+         */
+        $qb = $repository->createQueryBuilder('a');
+        $qb->orderBy('a.'.$order);
+        $results = $qb->getQuery()->getResult();
+
+      }
+
+      return array(
+        "results"=>$results,
+        "meta"=>array(
+          "pk"=>$request->query->get('pk',"id"),
+          "description"=>$request->query->get('description',"name")
+        )
+      );
+    }
+
     private function addFiltersToQuery(QueryBuilder $qb, ClassMetadata $meta, $filters){
 
       $filters = $this->getFiltersFromQueryString($filters);
@@ -81,6 +106,8 @@ class ManagementController extends Controller{
               $qb->andWhere("a.".$field." LIKE :".$field."_value")->setParameter($field."_value","%".$value."%");
             }
 
+          }elseif(in_array($field,$meta->getAssociationNames()) && !empty($value)){
+            $qb->andWhere("a.".$field." = :".$field."_value")->setParameter($field."_value",$value);
           }
 
         }
@@ -101,11 +128,11 @@ class ManagementController extends Controller{
       return $qb;
     }
 
-  /**
-   * @param string $filters Filters query string
-   * @return array
-   */
-  private function getFiltersFromQueryString($filters){
+    /**
+     * @param string $filters Filters query string
+     * @return array
+     */
+    private function getFiltersFromQueryString($filters){
       $output = array();
       parse_str($filters,$output);
       return $output;

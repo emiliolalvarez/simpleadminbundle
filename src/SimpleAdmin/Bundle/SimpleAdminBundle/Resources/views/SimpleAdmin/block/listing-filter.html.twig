@@ -4,6 +4,12 @@
             <span>[[ filter.label ]]</span>
             <textarea name="[[ filter.field ]]"></textarea>
         </div>
+        <div ng-switch-when="select">
+            <span>[[ filter.label ]]</span>
+            <select name="[[ filter.field ]]" ng-select-load data-entity="[[ filter.entity ]]" data-order="[[ filter.entity_order ]]" data-pk="[[ filter.entity_pk_field ]]" data-description="[[ filter.entity_description_field ]]">
+                <option value="">{{ "Select an option" | trans }}</option>
+            </select>
+        </div>
         <div ng-switch-default>
             <span>[[ filter.label ]]</span>
             <input type="text" name="[[ filter.field ]]">

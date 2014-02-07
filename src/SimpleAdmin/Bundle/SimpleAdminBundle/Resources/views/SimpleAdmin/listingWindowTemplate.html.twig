@@ -5,23 +5,35 @@
         <form ng-hide="listingWindows['{{ windowId }}'].metadata.filters.length == 0" class="filter-form">
             {% include "SimpleAdminBundle::SimpleAdmin/block/listing-filter.html.twig" %}
             <span ng-click="changeListingPage(1,'{{ windowId }}')" type="button" class="label label-info">{{ "Filter" | trans }}</span>
+            <span ng-click="clearFilters('{{ windowId }}')" type="button" class="label label-default">{{ "Clear" | trans }}</span>
         </form>
     </div>
-    <table class="list">
+    <table class="list" ng-show="listingWindows['{{ windowId }}'].data.items.length">
         <thead class="listHeader">
             <tr>
                 <td ng-repeat="column in listingWindows['{{  windowId }}'].metadata.columns">[[ column.alias ]]</td>
+                <td class="align-center">{{ "Options" | trans }}</td>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in listingWindows['{{ windowId }}'].data.items">
                 <td ng-repeat="column in listingWindows['{{ windowId }}'].metadata.columns">[[item[column.field] ]]</td>
+                <td>
+                    <table class="icons">
+                        <tbody>
+                            <tr>
+                                <td class="align-center"><i class="fa fa-pencil-square-o"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
             </tr>
         </tbody>
     </table>
+    <div class="no-results" ng-hide="listingWindows['{{ windowId }}'].data.items.length" ng-cloak>{{ "No results found" | trans }}</div>
 {% endblock window_content %}
 {% block pager %}
-    <div class="pager clearfix">
+    <div class="pager clearfix" ng-show="listingWindows['{{ windowId }}'].data.totalPages > 1">
         <div class="pull-left pager-legend">{{ "Page" | trans }}:</div>
         <a ng-repeat="page in range(listingWindows['{{ windowId }}'].data.totalPages) track by $index" class="page pull-left" ng-class="{'selected': listingWindows['{{ windowId }}'].data.currentPage == ($index + 1)}" href="javascript:void(0);" ng-click="changeListingPage($index + 1,'{{ windowId }}')">[[$index + 1]]</a>
     </div>
