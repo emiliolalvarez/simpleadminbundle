@@ -20,10 +20,10 @@ class SimpleAdminController extends Controller
         return array();
     }
 
-  /**
-   * @Route("/template/window/listing")
-   * @Template()
-   */
+    /**
+     * @Route("/template/window/listing")
+     * @Template()
+     */
     public function listingWindowTemplateAction(Request $request){
 
         return array(
@@ -32,6 +32,18 @@ class SimpleAdminController extends Controller
           'currentPage'=>$request->query->get('currentPage')
         );
 
+    }
+
+    /**
+     * @Route("/template/window/edit")
+     * @Template()
+     */
+    public function editWindowTemplateAction(Request $request){
+      return array(
+        'windowId'=>$request->query->get('windowId'),
+        'editWindowId'=>$request->query->get('editWindowId'),
+        'id'=>$request->query->get('id'),
+      );
     }
 
 }

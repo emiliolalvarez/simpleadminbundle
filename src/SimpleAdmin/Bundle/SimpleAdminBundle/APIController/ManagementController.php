@@ -64,6 +64,36 @@ class ManagementController extends Controller{
 
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param string $entityRepositoryName
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getRepositoryRecordAction(Request $request,$entityRepositoryName,$id){
+
+      return array(
+        "id"=>$id,
+        "repository"=>$entityRepositoryName
+      );
+
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param string $entityRepositoryName
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function postRepositoryRecordAction(Request $request,$entityRepositoryName,$id){
+
+      return array(
+        "id"=>$id,
+        "repository"=>$entityRepositoryName
+      );
+
+    }
+
     public function getComboValuesAction(Request $request){
       $entity = $request->query->get('entity',null);
       $results = array();

@@ -1,5 +1,5 @@
 angular.module('simpleadmin.controllers',[])
-    .controller('DesktopController', ['$scope','$compile','$routeParams','$q','$http','ManagedEntity','ListingWindow', function($scope,$compile,$rootParams,$q,$http,ManagedEntity,ListingWindow) {
+    .controller('DesktopController', ['$scope','$compile','$routeParams','$q','$http','ManagedEntity','ListingWindow','Management', function($scope,$compile,$rootParams,$q,$http,ManagedEntity,ListingWindow,Management) {
 
         $scope.managedEntities = [];
 
@@ -47,8 +47,8 @@ angular.module('simpleadmin.controllers',[])
 
         $scope.openListWindow = function(entry){
             var id = "window_list_"+entry.entity.toLowerCase().replace(/[:|\|\/]/g,"_");
-            $scope.showLoader($('.desktop'));
             if($("#"+id).length == 0){
+                $scope.showLoader($('.desktop'));
                 ListingWindow.listing({'repository':entry.entity,'page':1},function(data){
                     console.log(data);
                     var deferred = $q.defer();
@@ -72,6 +72,40 @@ angular.module('simpleadmin.controllers',[])
                     })
                 });
             }
+        };
+
+        $scope.editRecord = function(windowId, id){
+          var metadata = $scope.listingWindows[windowId].metadata;
+          var editWindowId = "window_edit_"+entry.entity.toLowerCase().replace(/[:|\|\/]/g,"_")+"_"+id;
+          if($("#"+editWindowId).length() == 0){
+            $scope.showLoader($('.desktop'));
+            Management.retrieve({'repository':metadata.entity,'id':id},function(data){
+              console.log("Edit record "+id);
+              console.log(data);
+              $http(
+                {
+                  method: 'GET',
+                  url: Routing.generate('simpleadmin_simpleadmin_simpleadmin_editwindowtemplate'),
+                  params: {'windowId':windowId,'editWindowId':editWindowId,'totalPages':data.totalPages,'currentPage':data.currentPage},
+                  data: '',
+                  headers: {
+                    "Accept": "text/html"
+                  }
+                }
+              ).success(function(template, status, headers, config) {
+                  deferred.resolve(template);
+                }
+              );
+              deferred.promise.then(function(template){
+                $scope.renderRecord(template,id,entry,data);
+                $scope.removeLoader($('.desktop'));
+              })
+            });
+          }
+        };
+
+        $scope.renderRecord = function(template,id,entry,data){
+          console.log("Render record");
         };
 
         $scope.adjustWindowContent = function(windowId){

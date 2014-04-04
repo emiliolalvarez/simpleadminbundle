@@ -62,4 +62,41 @@ angular.module('simpleadmin.models', ['ngResource'])
                     }
                 });
         }
+    ])
+    .factory('Management', [
+      '$resource', function($resource) {
+        return $resource(Routing.getBaseUrl()+'/api/repositories/:repository/records/:id',
+          {
+            repository: '@repository',
+            id: '@id'
+          },
+          {
+            retrieve: {
+              method: "GET",
+              isArray: false,
+              params: {
+                verb: 'get'
+              }
+            }
+          },
+          {
+            save: {
+              method: "POST",
+              isArray: false,
+              params: {
+                verb: 'save'
+              }
+            }
+          },
+          {
+            update: {
+              method: "PUT",
+                isArray: false,
+                params: {
+                verb: 'update'
+              }
+            }
+          }
+        );
+      }
     ]);
