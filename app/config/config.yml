@@ -166,7 +166,7 @@ knp_paginator:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
 fos_js_routing:
-    routes_to_expose: [ api_get_managed_entities, api_get_listing_window, simpleadmin_simpleadmin_simpleadmin_listingwindowtemplate]
+    routes_to_expose: [ api_get_managed_entities, api_get_listing_window, simpleadmin_simpleadmin_simpleadmin_listingwindowtemplate,simpleadmin_simpleadmin_simpleadmin_editwindowtemplate]
 
 jms_di_extra:
     locations:
@@ -174,6 +174,10 @@ jms_di_extra:
         bundles: [SimpleAdminBundle]
         directories: ["%kernel.root_dir%/../src","%kernel.root_dir%/../src/SimpleAdmin/Bundle/SimpleAdminBundle/Listener"]
 
+jms_serializer:
+    property_naming:
+      separator:  ""
+      lower_case: true
 
 simple_admin:
     manage:

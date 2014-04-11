@@ -5,7 +5,7 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityManager;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -72,9 +72,22 @@ class ManagementController extends Controller{
      */
     public function getRepositoryRecordAction(Request $request,$entityRepositoryName,$id){
 
+      $em = $this->getDoctrine();
+      $repository = $em->getRepository($entityRepositoryName);
+      /**@var ClassMetadata $meta**/
+      $meta = $em->getManager()->getClassMetadata($repository->getClassName());
+      $fieldMapping = $meta->getAssociationMappings();
+      $fields = array();
+      foreach($meta->getFieldNames() as $fieldName){
+        $fields[] = $meta->getFieldMapping($fieldName);
+      }
+
       return array(
         "id"=>$id,
-        "repository"=>$entityRepositoryName
+        "repository"=>$entityRepositoryName,
+        "fields"=> $fields,
+        "mappings"=>$fieldMapping,
+        "entry"=>!empty($id)?$repository->find($id):false
       );
 
     }

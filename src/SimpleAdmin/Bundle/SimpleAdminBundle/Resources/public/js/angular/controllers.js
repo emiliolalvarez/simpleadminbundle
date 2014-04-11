@@ -5,6 +5,8 @@ angular.module('simpleadmin.controllers',[])
 
         $scope.listingWindows = [];
 
+        $scope.listingWindowsRecords = [];
+
         $scope.testVar = "test var 1";
 
         $scope.setTestVar = function(text) {
@@ -76,17 +78,17 @@ angular.module('simpleadmin.controllers',[])
 
         $scope.editRecord = function(windowId, id){
           var metadata = $scope.listingWindows[windowId].metadata;
-          var editWindowId = "window_edit_"+entry.entity.toLowerCase().replace(/[:|\|\/]/g,"_")+"_"+id;
-          if($("#"+editWindowId).length() == 0){
+          var editWindowId = "window_edit_" + metadata.entity.toLowerCase().replace(/[:|\|\/]/g,"_")+"_"+id;
+          if($("#"+editWindowId).length == 0){
             $scope.showLoader($('.desktop'));
             Management.retrieve({'repository':metadata.entity,'id':id},function(data){
+              var deferred = $q.defer();
               console.log("Edit record "+id);
-              console.log(data);
               $http(
                 {
                   method: 'GET',
                   url: Routing.generate('simpleadmin_simpleadmin_simpleadmin_editwindowtemplate'),
-                  params: {'windowId':windowId,'editWindowId':editWindowId,'totalPages':data.totalPages,'currentPage':data.currentPage},
+                  params: {'windowId':windowId,'editWindowId':editWindowId,'recordId':id,'totalPages':data.totalPages,'currentPage':data.currentPage},
                   data: '',
                   headers: {
                     "Accept": "text/html"
@@ -97,21 +99,43 @@ angular.module('simpleadmin.controllers',[])
                 }
               );
               deferred.promise.then(function(template){
-                $scope.renderRecord(template,id,entry,data);
+                $scope.renderRecord(template,windowId,editWindowId,id,metadata,data);
                 $scope.removeLoader($('.desktop'));
               })
             });
           }
         };
 
-        $scope.renderRecord = function(template,id,entry,data){
+        $scope.renderRecord = function(template,listWindowId,editWindowId,recordId,metadata,data){
           console.log("Render record");
+          var win = $(template);
+          win.attr('id',editWindowId);
+          win.draggable({ containment: ".desktop", scroll: false });
+          win.resizable(
+            {
+              stop:function(event){
+                $scope.adjustWindowContent($(event.target).attr('id'));
+              }
+            }
+          );
+
+          if($scope.listingWindowsRecords[listWindowId] == undefined){
+            $scope.listingWindowsRecords[listWindowId] = [];
+          }
+          $scope.listingWindowsRecords[listWindowId][recordId] = {'metadata': metadata, 'data': data };
+          $('.desktop').append(win);
+          $compile(win.contents())($scope);
+          $scope.adjustWindowContent(editWindowId);
         };
 
         $scope.adjustWindowContent = function(windowId){
             win = $('#'+windowId);
             var h= win.height() - win.find('.pop-window-title').height() - win.find('.pager').height();
             win.find('.pop-window-content').css('height',h+'px');
+            win.css('position','absolute');
+            win.css('top',(($('.desktop').height() - win.height)/2) + 'px' );
+            win.css('left',(($('.desktop').width() - win.width())/2) + 'px');
+            win.css('zIndex','1000');
         };
 
         $scope.renderPage = function(win,data){

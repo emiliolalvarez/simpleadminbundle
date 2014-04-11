@@ -42,7 +42,7 @@ class SimpleAdminController extends Controller
       return array(
         'windowId'=>$request->query->get('windowId'),
         'editWindowId'=>$request->query->get('editWindowId'),
-        'id'=>$request->query->get('id'),
+        'recordId'=>$request->query->get('recordId'),
       );
     }
 

@@ -26,4 +26,12 @@ angular.module('simpleadmin.filters', [])
                 return input.substring(0, 1).toUpperCase() + input.substring(1);
             }
         };
+    })
+    .filter('doctrineEntityName', function() {
+      return function(input, scope) {
+        if (input) {
+          var split = input.split("\\");
+          return split[split.length-1];
+        }
+      };
     });

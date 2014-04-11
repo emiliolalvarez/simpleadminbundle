@@ -1,40 +1,35 @@
 {% extends "SimpleAdminBundle::SimpleAdmin/windowTemplate.html.twig" %}
-{% block window_title %}[[ listingWindows['{{  windowId }}'].metadata.name ]]{% endblock %}
+{% block window_title %}{{ 'Edit' | trans }} [[ listingWindows['{{  windowId }}'].metadata.name ]]{% endblock %}
 {% block window_content %}
-    <div class="filters clearfix">
-        <form ng-hide="listingWindows['{{ windowId }}'].metadata.filters.length == 0" class="filter-form">
-            {% include "SimpleAdminBundle::SimpleAdmin/block/listing-filter.html.twig" %}
-            <span ng-click="changeListingPage(1,'{{ windowId }}')" type="button" class="label label-info">{{ "Filter" | trans }}</span>
-            <span ng-click="clearFilters('{{ windowId }}')" type="button" class="label label-default">{{ "Clear" | trans }}</span>
-        </form>
-    </div>
-    <table class="list" ng-show="listingWindows['{{ windowId }}'].data.items.length">
-        <thead class="listHeader">
-            <tr>
-                <td ng-repeat="column in listingWindows['{{  windowId }}'].metadata.columns">[[ column.alias ]]</td>
-                <td class="align-center">{{ "Options" | trans }}</td>
-            </tr>
-        </thead>
+    <table class="content">
         <tbody>
-            <tr ng-repeat="item in listingWindows['{{ windowId }}'].data.items">
-                <td ng-repeat="column in listingWindows['{{ windowId }}'].metadata.columns">[[item[column.field] ]]</td>
+            <tr ng-repeat="mapping in listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.mappings">
                 <td>
-                    <table class="icons">
-                        <tbody>
-                            <tr>
-                                <td class="align-center" ng-click="editRecord('{{ windowId }}',item['id'])"><i class="fa fa-pencil-square-o"></i></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <b>[[ mapping.fieldName ]]</b>
+                    <div ng-switch on="mapping.targetEntity | doctrineEntityName">
+                        <div class="[[ mapping.joinColumns[0].name ]]" ng-switch-when="Media">
+                            <input name="" type="text" value="[[]]" />
+                        </div>
+                        <div class="[[ mapping.joinColumns[0].name ]]" ng-switch-default>
+                            <input name="[[ mapping.joinColumns[0].name ]]_value_label" type="text" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[mapping.fieldName]['name'] ]]" />
+                            <input name="[[ mapping.joinColumns[0].name ]]" type="hidden" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[mapping.fieldName]['id'] ]]" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-repeat="field in listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.fields">
+                <td>
+                   <b>[[ field.fieldName ]]</b>
+                   <div ng-switch on="field.type">
+                       <div class="[[ field.type ]]" ng-switch-when="integer">
+                           <input name="[[ field.columnName ]]" type="text" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[field.columnName.toLowerCase()] ]]" />
+                       </div>
+                       <div class="[[ field.type ]]" ng-switch-when="string">
+                           <input name="[[ field.columnName ]]" type="text" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[field.columnName.toLowerCase()] ]]" />
+                       </div>
+                   </div>
                 </td>
             </tr>
         </tbody>
     </table>
-    <div class="no-results" ng-hide="listingWindows['{{ windowId }}'].data.items.length" ng-cloak>{{ "No results found" | trans }}</div>
 {% endblock window_content %}
-{% block pager %}
-    <div class="pager clearfix" ng-show="listingWindows['{{ windowId }}'].data.totalPages > 1">
-        <div class="pull-left pager-legend">{{ "Page" | trans }}:</div>
-        <a ng-repeat="page in range(listingWindows['{{ windowId }}'].data.totalPages) track by $index" class="page pull-left" ng-class="{'selected': listingWindows['{{ windowId }}'].data.currentPage == ($index + 1)}" href="javascript:void(0);" ng-click="changeListingPage($index + 1,'{{ windowId }}')">[[$index + 1]]</a>
-    </div>
-{% endblock %}
