@@ -1,7 +1,7 @@
 {% extends "SimpleAdminBundle::SimpleAdmin/windowTemplate.html.twig" %}
 {% block window_title %}{{ 'Edit' | trans }} [[ listingWindows['{{  windowId }}'].metadata.name ]]{% endblock %}
 {% block window_content %}
-    <table class="content">
+    <table class="content record">
         <tbody>
             <tr ng-repeat="mapping in listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.mappings">
                 <td>
@@ -10,24 +10,32 @@
                         <div class="[[ mapping.joinColumns[0].name ]]" ng-switch-when="Media">
                             <input name="" type="text" value="[[]]" />
                         </div>
-                        <div class="[[ mapping.joinColumns[0].name ]]" ng-switch-default>
-                            <input name="[[ mapping.joinColumns[0].name ]]_value_label" type="text" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[mapping.fieldName]['name'] ]]" />
+                        <div class="mapping [[ mapping.joinColumns[0].name ]] clearfix" ng-switch-default>
+                            <input class="pull-left" name="[[ mapping.joinColumns[0].name ]]_value_label" type="text" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[mapping.fieldName]['name'] ]]" readonly="readonly" />
                             <input name="[[ mapping.joinColumns[0].name ]]" type="hidden" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[mapping.fieldName]['id'] ]]" />
+                            <span class="btn btn-info pull-left" ng-click="openSimpleListingModal($event,'{{ editWindowId }}',mapping.joinColumns[0].name ,mapping.joinColumns[0].referencedColumnName,mapping.targetEntity)">{{ "Find" | trans }}</span>
                         </div>
                     </div>
                 </td>
             </tr>
             <tr ng-repeat="field in listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.fields">
                 <td>
-                   <b>[[ field.fieldName ]]</b>
-                   <div ng-switch on="field.type">
-                       <div class="[[ field.type ]]" ng-switch-when="integer">
-                           <input name="[[ field.columnName ]]" type="text" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[field.columnName.toLowerCase()] ]]" />
-                       </div>
-                       <div class="[[ field.type ]]" ng-switch-when="string">
-                           <input name="[[ field.columnName ]]" type="text" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[field.columnName.toLowerCase()] ]]" />
-                       </div>
-                   </div>
+                    <div ng-switch="listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.pkFields.indexOf(field.columnName)">
+                        <div ng-switch-when="-1">
+                            <b>[[ field.fieldName ]]</b>
+                            <div ng-switch on="field.type">
+                                <div class="[[ field.type ]]" ng-switch-when="integer">
+                                    <input name="[[ field.columnName ]]" type="text" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[field.columnName.toLowerCase()] ]]" />
+                                </div>
+                                <div class="[[ field.type ]]" ng-switch-when="string">
+                                    <input name="[[ field.columnName ]]" type="text" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[field.columnName.toLowerCase()] ]]" />
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-switch-default>
+                            <input name="[[ field.columnName ]]" type="hidden" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[field.columnName.toLowerCase()] ]]" />
+                        </div>
+                    </div>
                 </td>
             </tr>
         </tbody>

@@ -166,7 +166,12 @@ knp_paginator:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
 fos_js_routing:
-    routes_to_expose: [ api_get_managed_entities, api_get_listing_window, simpleadmin_simpleadmin_simpleadmin_listingwindowtemplate,simpleadmin_simpleadmin_simpleadmin_editwindowtemplate]
+    routes_to_expose:
+       - api_get_managed_entities
+       - api_get_listing_window
+       - simpleadmin_simpleadmin_simpleadmin_simplelistingmodaltemplate
+       - simpleadmin_simpleadmin_simpleadmin_listingwindowtemplate
+       - simpleadmin_simpleadmin_simpleadmin_editwindowtemplate
 
 jms_di_extra:
     locations:
@@ -182,6 +187,7 @@ jms_serializer:
 simple_admin:
     manage:
       entities:
-        - {name: 'Person', entity: 'SimpleAdminBundle:Person', columns: [{field: id, alias: id},{field: name, alias: nombre}], filters:[{field: name,type: text, label: "Name" },{field: lastName, type:text,label: "Last name"},{field: country, type:select,label: "Country", entity: "SimpleAdminBundle:Country", entity_order: "name",entity_description_field: "name", entity_pk_field: "id" }]}
-        - {name: 'User', entity: 'SimpleAdminBundle:User'}
-        - {name: 'Nested Test', children: [{name: 'User', entity: 'SimpleAdminBundle:User'}]}
+        - {name: 'Person', entity: 'SimpleAdmin\Bundle\SimpleAdminBundle\Entity\Person', columns: [{field: id, alias: id},{field: name, alias: nombre}], filters:[{field: name,type: text, label: "Name" },{field: lastName, type:text,label: "Last name"},{field: country, type:select,label: "Country", entity: "SimpleAdmin\Bundle\SimpleAdminBundle\Entity\Country", entity_order: "name",entity_description_field: "name", entity_pk_field: "id" }]}
+        - {name: 'Country', entity: 'SimpleAdmin\Bundle\SimpleAdminBundle\Entity\Country', columns: [{field: id, alias: id},{field: name, alias: nombre}], filters:[{field: name,type: text, label: "Name" }]}
+        - {name: 'User', entity: 'SimpleAdmin\Bundle\SimpleAdminBundle\Entity\User'}
+        - {name: 'Nested Test', children: [{name: 'User', entity: 'SimpleAdmin\Bundle\SimpleAdminBundle\Entity\User'}]}

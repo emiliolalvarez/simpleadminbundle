@@ -5,6 +5,7 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension;
@@ -37,28 +38,35 @@ class ManagementController extends Controller{
      */
     public function getListingWindowAction(Request $request,$entityRepositoryName){
 
-        /**
+      $em = $this->getDoctrine();
+      /** @var EntityRepository $repository */
+      $repository = $em->getRepository($entityRepositoryName);
+      $meta = $em->getManager()->getClassMetadata($repository->getClassName());
+
+      /**
          * @var QueryBuilder $qb
          */
-        $qb = $this->prepareQuery($entityRepositoryName,$request->query->get('filters',''));
+      $qb = $this->prepareQuery($entityRepositoryName,$request->query->get('filters',''));
 
-        $query = $qb->getQuery();
+      $query = $qb->getQuery();
 
-        $paginator  = $this->get('knp_paginator');
+      $paginator  = $this->get('knp_paginator');
 
-        /** @var SlidingPagination $pagination */
-        $pagination = $paginator->paginate(
-            $query,
-            $this->get('request')->query->get('page', 1),
-            1
-        );
+      /** @var SlidingPagination $pagination */
+      $pagination = $paginator->paginate(
+          $query,
+          $this->get('request')->query->get('page', 1),
+          1
+      );
 
-        return array(
+      return array(
+          "repository"=>$meta->getName(),
           "items"=>$pagination->getItems(),
           "total"=>$pagination->getTotalItemCount(),
           "pageSize"=>$pagination->getItemNumberPerPage(),
           "currentPage"=>$pagination->getCurrentPageNumber(),
           "totalPages"=> ceil($pagination->getTotalItemCount()/$pagination->getItemNumberPerPage()),
+          "meta"=>$meta,
           "extra"=>"test"
         );
 
@@ -81,11 +89,13 @@ class ManagementController extends Controller{
       foreach($meta->getFieldNames() as $fieldName){
         $fields[] = $meta->getFieldMapping($fieldName);
       }
+      $pkFields = $meta->getIdentifierColumnNames();
 
       return array(
         "id"=>$id,
         "repository"=>$entityRepositoryName,
         "fields"=> $fields,
+        "pkFields"=>$pkFields,
         "mappings"=>$fieldMapping,
         "entry"=>!empty($id)?$repository->find($id):false
       );

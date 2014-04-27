@@ -1,0 +1,53 @@
+<div>
+    <div class="modal fade" id="baseModalTemplate" tabindex="-1" role="dialog" aria-labelledby="baseModalTemplate" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">[[ title ]]</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body-content-wrapper">
+                        <div class="filters clearfix">
+                            <form ng-hide="listingWindows['{{ windowId }}'].metadata.filters.length == 0" class="filter-form">
+                                {% include "SimpleAdminBundle::SimpleAdmin/block/listing-filter.html.twig" %}
+                                <span ng-click="changeListingPage(1,'{{ windowId }}')" type="button" class="label label-info">{{ "Filter" | trans }}</span>
+                                <span ng-click="clearFilters('{{ windowId }}')" type="button" class="label label-default">{{ "Clear" | trans }}</span>
+                            </form>
+                        </div>
+                        <table class="list" ng-show="listingWindows['{{ windowId }}'].data.items.length">
+                            <thead class="listHeader">
+                            <tr>
+                                <td ng-repeat="column in listingWindows['{{  windowId }}'].metadata.columns">[[ column.alias ]]</td>
+                                <td class="align-center">{{ "Options" | trans }}</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in listingWindows['{{ windowId }}'].data.items">
+                                <td ng-repeat="column in listingWindows['{{ windowId }}'].metadata.columns" class="column-value" data-column-name="[[ column.field ]]" data-column-value="[[ item[column.field] ]]">[[item[column.field] ]]</td>
+                                <td>
+                                    <table class="icons">
+                                        <tbody>
+                                        <tr>
+                                            <td class="align-center" ng-click="changeFieldSelectorValue('{{ windowId }}','{{ openerWindowId }}','{{ sourcePkColumn }}','{{ targetPkColumn }}')"><i class="fa fa-caret-square-o-right"></i></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="no-results" ng-hide="listingWindows['{{ windowId }}'].data.items.length" ng-cloak>{{ "No results found" | trans }}</div>
+                        <div class="pager clearfix" ng-show="listingWindows['{{ windowId }}'].data.totalPages > 1">
+                            <div class="pull-left pager-legend">{{ "Page" | trans }}:</div>
+                            <a ng-repeat="page in range(listingWindows['{{ windowId }}'].data.totalPages) track by $index" class="page pull-left" ng-class="{'selected': listingWindows['{{ windowId }}'].data.currentPage == ($index + 1)}" href="javascript:void(0);" ng-click="changeListingPage($index + 1,'{{ windowId }}')">[[$index + 1]]</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"  ng-click="closeSimpleModalDialog('{{ windowId }}')">{{ "Close" | trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

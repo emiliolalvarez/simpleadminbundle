@@ -17,6 +17,7 @@
   text-align: right;
 }
 
+
 .pop-window{
   width:455px;
   height: 400px;
@@ -24,28 +25,6 @@
   border: 1px solid #d1d1d1;
   overflow: hidden;
   padding:7px;
-
-  .pager{
-    position: absolute;
-    bottom: -18px;
-    a{
-      width: 20px;
-      height: 20px;
-      line-height: 20px;
-      text-align: center;
-      margin-right: 3px;
-      text-decoration: none;
-    }
-    .selected{
-      color: #FFFFFF;
-      background-color: #1f6377;
-    }
-    .pager-legend{
-      margin-right: 10px;
-      height: 20px;
-      line-height: 20px;
-    }
-  }
   /*.pop-window .pop-window-box .pop-window-box-inner .pop-window-content .pop-window-content-inner .pop-window-content-inner-box input{
 
   }*/
@@ -112,51 +91,81 @@
           overflow: auto;
           .pop-window-content-inner-box{
             width: 100%;
-            .filters{
-              padding: 10px 0px 0px 0px;
-              form{
-                .filter{
-                  font-size: 12px;
-                  margin: 0px 5px 10px 0px;
-                  input[type="text"]{
-                    width: 100px;
-                    height: 17px;
-                    line-height: 17px;
-                    margin-bottom: 0px;
-                  }
-                  select{
-                    font-size: 12px;
-                    width: 150px;
-                    height: 24px;
-                    line-height: 24px;
-                  }
-                }
-                span.label{
-                  height: 22px;
-                  line-height: 22px;
-                  min-width: 47px;
-                  text-align: center;
-                  cursor: pointer;
-                }
-              }
-            }
-            .list{
-              tbody{
-                td{
-                  padding-left: 5px;
-                  table.icons{
-                    width: 100%;
-                    .fa{
-                      cursor: pointer;
-                    }
-                  }
-                }
-              }
-            }
           }
         }
       }
     }
+  }
+}
+
+.pop-window,.modal{
+  .filters{
+    padding: 10px 0px 0px 0px;
+    form{
+      .filter{
+        font-size: 12px;
+        margin: 0px 5px 10px 0px;
+        input[type="text"]{
+          width: 100px;
+          height: 17px;
+          line-height: 17px;
+          margin-bottom: 0px;
+        }
+        select{
+          font-size: 12px;
+          width: 150px;
+          height: 24px;
+          line-height: 24px;
+        }
+      }
+      span.label{
+        height: 22px;
+        line-height: 22px;
+        min-width: 47px;
+        text-align: center;
+        cursor: pointer;
+      }
+    }
+  }
+  .list{
+    tr{
+      td{
+        padding-left: 5px;
+        table.icons{
+          width: 100%;
+          .fa{
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .pager{
+    position: absolute;
+    bottom: -18px;
+    a{
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      margin-right: 3px;
+      text-decoration: none;
+    }
+    .selected{
+      color: #FFFFFF;
+      background-color: #1f6377;
+    }
+    .pager-legend{
+      margin-right: 10px;
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+}
+
+.modal{
+  .modal-body-content-wrapper{
+    min-height: 250px;
   }
 }
 

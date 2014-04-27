@@ -46,4 +46,21 @@ class SimpleAdminController extends Controller
       );
     }
 
+    /**
+     * @Route("/template/modal/listing/simple")
+     * @Template()
+     */
+    public function simpleListingModalTemplateAction(Request $request){
+
+      return array(
+        'windowId'=>$request->query->get('windowId'),
+        'openerWindowId'=>$request->query->get('openerWindowId'),
+        'sourcePkColumn'=>$request->query->get('sourcePkColumn'),
+        'targetPkColumn'=>$request->query->get('targetPkColumn'),
+        'totalPages'=>$request->query->get('totalPages'),
+        'currentPage'=>$request->query->get('currentPage')
+      );
+
+    }
+
 }

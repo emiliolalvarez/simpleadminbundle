@@ -1,5 +1,5 @@
-angular.module('simpleadmin.controllers',[])
-    .controller('DesktopController', ['$scope','$compile','$routeParams','$q','$http','ManagedEntity','ListingWindow','Management', function($scope,$compile,$rootParams,$q,$http,ManagedEntity,ListingWindow,Management) {
+angular.module('simpleadmin.controllers',['ui.bootstrap'])
+    .controller('DesktopController', ['$scope','$compile','$routeParams','$q','$http','$modal','ManagedEntity','ListingWindow','Management', function($scope,$compile,$rootParams,$q,$http,$modal,ManagedEntity,ListingWindow,Management) {
 
         $scope.managedEntities = [];
 
@@ -47,8 +47,12 @@ angular.module('simpleadmin.controllers',[])
             $compile(parent.contents())($scope);
         };
 
+        $scope.getCleanEntityName = function(entityName){
+          return entityName.toLowerCase().replace(/[:|\\|\/]/g,"_")
+        };
+
         $scope.openListWindow = function(entry){
-            var id = "window_list_"+entry.entity.toLowerCase().replace(/[:|\|\/]/g,"_");
+            var id = "window_list_"+$scope.getCleanEntityName(entry.entity);
             if($("#"+id).length == 0){
                 $scope.showLoader($('.desktop'));
                 ListingWindow.listing({'repository':entry.entity,'page':1},function(data){
@@ -76,9 +80,80 @@ angular.module('simpleadmin.controllers',[])
             }
         };
 
+        $scope.changeFieldSelectorValue = function(windowId,openerWindowId,sourcePkColumn,targetPkColumn){
+          var description = "";
+          var value = "";
+          $('#'+windowId).find('.column-value').each(function(){
+            var columnName = $(this).data('columnName');
+            if(targetPkColumn != columnName){
+              description +=(description!=''?' ':'')+$(this).data('columnValue');
+            }else{
+              value = $(this).data('columnValue');
+            }
+          });
+          $('#'+openerWindowId).find('input[name="'+sourcePkColumn+'"]').val(value);
+          $('#'+openerWindowId).find('input[name="'+sourcePkColumn+'_value_label"]').val(description);
+          $scope.closeSimpleModalDialog(windowId);
+        };
+
+        $scope.openSimpleListingModal = function(event,currentWindowId,sourcePkColumn, targetPkColumn, repository){
+          console.log(arguments);
+          var entry = $scope.getManagedEntity(repository);
+          if(entry){
+            var windowId = 'simpleListModal'
+            $scope.showLoader($('.desktop'));
+            ListingWindow.listing({'repository':repository,'page':1},function(data){
+              $http(
+                {
+                  method: 'GET',
+                  url: Routing.generate('simpleadmin_simpleadmin_simpleadmin_simplelistingmodaltemplate'),
+                  params: {'windowId':windowId,'totalPages':data.totalPages,'currentPage':data.currentPage,sourcePkColumn:sourcePkColumn,targetPkColumn:targetPkColumn,openerWindowId: currentWindowId},
+                  data: '',
+                  headers: {
+                    "Accept": "text/html"
+                  }
+                }
+              ).success(function(template) {
+                  $scope.renderSimpleListingModal(template,windowId,entry,data);
+                  $scope.removeLoader($('.desktop'));
+                }
+              );
+            });
+          }else{
+            console.log("Error: no configuration available for "+repository+ " entity")
+          }
+        };
+
+        $scope.renderSimpleListingModal = function(template,windowId,entry,data){
+          $scope.listingWindows[windowId] = {metadata: entry, data: data};
+          $('#'+windowId).remove();
+          var modalTpl = $($(template).html());
+          modalTpl.attr('id',windowId);
+          modalTpl.find(".modal-body").html();
+          modalTpl.find(".modal-title").html(entry.name);
+          $('.desktop').append(modalTpl);
+          $compile(modalTpl.contents())($scope);
+          modalTpl.modal();
+        };
+
+        $scope.closeSimpleModalDialog = function(windowId){
+          $('#'+windowId).modal('hide');
+          $('#'+windowId).remove();
+        };
+
+        $scope.getManagedEntity = function(repository){
+          var entry = false;
+          angular.forEach($scope.managedEntities, function(value, key) {
+            if(value.entity == repository){
+              entry = value;
+            }
+          });
+          return entry;
+        };
+
         $scope.editRecord = function(windowId, id){
           var metadata = $scope.listingWindows[windowId].metadata;
-          var editWindowId = "window_edit_" + metadata.entity.toLowerCase().replace(/[:|\|\/]/g,"_")+"_"+id;
+          var editWindowId = "window_edit_" + $scope.getCleanEntityName(metadata.entity)+"_"+id;
           if($("#"+editWindowId).length == 0){
             $scope.showLoader($('.desktop'));
             Management.retrieve({'repository':metadata.entity,'id':id},function(data){
@@ -162,7 +237,7 @@ angular.module('simpleadmin.controllers',[])
 
         $scope.changeListingPage=function(page,windowId){
             console.log("Change to page: "+page);
-            $scope.showLoader($('#'+windowId+' .pop-window-content'));
+            $scope.showLoader($('#'+windowId+' .pop-window-content, #'+windowId+' .modal-content'));
 
             var filters = '';
             if($('#'+windowId + ' .filters .filter').length){
@@ -171,7 +246,7 @@ angular.module('simpleadmin.controllers',[])
 
             ListingWindow.listing({'repository':$scope.listingWindows[windowId].metadata.entity,'page':page, 'filters': filters},function(data){
                 $scope.listingWindows[windowId].data = data;
-                $scope.removeLoader($('#'+windowId+' .pop-window-content'));
+                $scope.removeLoader($('#'+windowId+' .pop-window-content, #'+windowId+' .modal-content'));
             });
         };
 
