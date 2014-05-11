@@ -27,6 +27,12 @@ class SerializationListener implements EventSubscriberInterface
     public $mediaManager;
 
     /**
+     * @var MediaManager $mediaManager
+     * @Inject("service_container", required = true)
+     */
+    public $container;
+
+    /**
      * @inheritdoc
      */
     static public function getSubscribedEvents()
@@ -40,7 +46,7 @@ class SerializationListener implements EventSubscriberInterface
 
     public function onPreSerialize(ObjectEvent $event)
     {
-
+/*
         $type = $event->getType();
         $object = $event->getObject();
         $context = $event->getContext();
@@ -57,7 +63,7 @@ class SerializationListener implements EventSubscriberInterface
             }
 
             return $visitor->visitArray($photo, $type, $context);
-        }
+        }*/
     }
 
     public function onPostSerialize(ObjectEvent $event)
@@ -65,9 +71,13 @@ class SerializationListener implements EventSubscriberInterface
         $object = $event->getObject();
 
 
-        $provider = $this->mediaManager->getPool()->getProvider($object->getProviderName());
+        //$provider = $this->mediaManager->getPool()->getProvider($object->getProviderName());
 
-        foreach ($this->mediaManager->getPool()->getFormatNamesByContext($object->getContext()) as $key => $format) {
+        $provider = $this->container->get($object->getProviderName());
+
+
+        //foreach ($this->mediaManager->getPool()->getFormatNamesByContext($object->getContext()) as $key => $format) {
+        foreach ($provider->getFormats() as  $key => $format) {
             $photo[$key] = $provider->generatePublicUrl($object, $key);
         }
 
