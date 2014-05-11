@@ -23,12 +23,20 @@
     }]);*/
 angular.module('simpleadminApp', ['simpleadmin.filters','simpleadmin.directives','simpleadmin.models','simpleadmin.controllers','ui','ngRoute','ngSanitize'])
     .config([
-        '$httpProvider', function($httpProvider) {
-            $httpProvider.defaults.headers.common['Accept'] = 'application/json';
-            return $httpProvider.defaults.headers.patch = {
-                'Content-Type': 'application/json;charset=utf-8'
-            };
-        }
+      '$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.headers.common['Accept'] = 'application/json';
+        $httpProvider.defaults.headers.patch["Content-Type"] =  'application/json;charset=utf-8';
+        $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+        $httpProvider.defaults.transformRequest.unshift(function (data, headersGetter) {
+          var key, result = [];
+          for (key in data) {
+            if (data.hasOwnProperty(key)) {
+              result.push(encodeURIComponent(key) + "=" + encodeURIComponent(data[key]));
+            }
+          }
+          return result.join("&");
+        });
+      }
     ])
     .config([
         '$interpolateProvider', function($interpolateProvider) {

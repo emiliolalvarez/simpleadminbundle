@@ -1,5 +1,5 @@
 angular.module('simpleadmin.controllers',['ui.bootstrap'])
-    .controller('DesktopController', ['$scope','$compile','$routeParams','$q','$http','$modal','ManagedEntity','ListingWindow','Management', function($scope,$compile,$rootParams,$q,$http,$modal,ManagedEntity,ListingWindow,Management) {
+    .controller('DesktopController', ['$scope','$compile','$routeParams','$q','$http','$modal','ManagedEntity','ListingWindow','Management', function($scope,$compile,$routeParams,$q,$http,$modal,ManagedEntity,ListingWindow,Management) {
 
         $scope.managedEntities = [];
 

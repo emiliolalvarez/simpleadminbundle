@@ -21,13 +21,14 @@ monolog:
 
 assetic:
     use_controller: false
+    node: "/usr/bin/node"
     filters:
         cssrewrite: ~
         coffee:
             bin: /usr/bin/coffee
             apply_to: "\.coffee$"
         less:
-            node_paths: [/usr/lib/node_modules]
+            node_paths: ['/usr/lib/node_modules/']
             apply_to: "\.less$"
 
 #swiftmailer:

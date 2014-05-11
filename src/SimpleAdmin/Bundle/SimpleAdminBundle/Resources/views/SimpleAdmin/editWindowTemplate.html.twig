@@ -8,7 +8,8 @@
                     <b>[[ mapping.fieldName ]]</b>
                     <div ng-switch on="mapping.targetEntity | doctrineEntityName">
                         <div class="[[ mapping.joinColumns[0].name ]]" ng-switch-when="Media">
-                            <input name="" type="text" value="[[]]" />
+                            <input name="[[ mapping.joinColumns[0].name ]]" type="hidden" value="[[]]" />
+                            <b>[[ listingWindowsRecords['{{ windowId }}']['{{ recordId }}'].data.entry.photo.imageUri['default_big'] | capitalize ]]</b>
                         </div>
                         <div class="mapping [[ mapping.joinColumns[0].name ]] clearfix" ng-switch-default>
                             <input class="pull-left" name="[[ mapping.joinColumns[0].name ]]_value_label" type="text" value="[[ listingWindowsRecords['{{ windowId }}'][{{ recordId }}].data.entry[mapping.fieldName]['name'] ]]" readonly="readonly" />

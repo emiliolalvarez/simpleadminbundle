@@ -15,7 +15,6 @@ framework:
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
-    trust_proxy_headers: false # Deprecated in 2.0; will be removed in 2.3 (used trusted_proxies instead)
     trusted_proxies: ~
     session:         ~
 
@@ -102,25 +101,6 @@ sonata_block:
         sonata.block.service.text:
         sonata.block.service.rss:
 
-# app/config/config.yml
-sonata_admin:
-    title:      Sonata Project
-    title_logo: /bundles/sonataadmin/logo_title.png
-    templates:
-        # default global templates
-        layout:  SonataAdminBundle::standard_layout.html.twig
-        ajax:    SonataAdminBundle::ajax_layout.html.twig
-
-        # default actions templates, should extend a global templates
-        list:    SonataAdminBundle:CRUD:list.html.twig
-        show:    SonataAdminBundle:CRUD:show.html.twig
-        edit:    SonataAdminBundle:CRUD:edit.html.twig
-
-    dashboard:
-        blocks:
-            # display a dashboard block
-            - { position: left, type: sonata.admin.block.admin_list }
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
@@ -153,6 +133,8 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: SimpleAdmin\Bundle\SimpleAdminBundle\Entity\User
+    group:
+      group_class: Sonata\UserBundle\Entity\Group
 
 knp_paginator:
     page_range: 5                      # default page range used in pagination control
