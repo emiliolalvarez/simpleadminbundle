@@ -34,14 +34,4 @@ angular.module('simpleadmin.filters', [])
           return split[split.length-1];
         }
       };
-    })
-    .filter('doctrineMediaFilePath', function() {
-      return function(input) {
-        if (angular.isArray(input)) {
-          angular.forEach(input,function(value,key){
-            return value;
-          });
-        }
-        return "";
-      };
     });

@@ -53,11 +53,14 @@ class SerializationListener implements EventSubscriberInterface
 
         $provider = $this->container->get($object->getProviderName());
 
+        $default = "";
         foreach ($provider->getFormats() as  $key => $format) {
             $photo[$key] = $provider->generatePublicUrl($object, $key);
+            $default = empty($default)?$photo[$key]:$default;
         }
 
         $event->getVisitor()->addData('imageUri',$photo);
+        $event->getVisitor()->addData('imageUriDefault',$default);
 
     }
 }
