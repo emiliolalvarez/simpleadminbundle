@@ -44,39 +44,15 @@ class SerializationListener implements EventSubscriberInterface
     }
 
 
-    public function onPreSerialize(ObjectEvent $event)
-    {
-/*
-        $type = $event->getType();
-        $object = $event->getObject();
-        $context = $event->getContext();
-        $visitor = $event->getVisitor();
+    public function onPreSerialize(ObjectEvent $event){
 
-        $r = $visitor->getResult();
-        if ('SimpleAdmin\Bundle\SimpleAdminBundle\Entity\Media' == $type['name']){
-            $photo = array();
-
-            $provider = $this->mediaManager->getPool()->getProvider($object->getProviderName());
-
-            foreach ($this->mediaManager->getPool()->getFormatNamesByContext($object->getContext()) as $key => $format) {
-                $photo[$key] = $provider->generatePublicUrl($object, $key);
-            }
-
-            return $visitor->visitArray($photo, $type, $context);
-        }*/
     }
 
-    public function onPostSerialize(ObjectEvent $event)
-    {
+    public function onPostSerialize(ObjectEvent $event){
         $object = $event->getObject();
-
-
-        //$provider = $this->mediaManager->getPool()->getProvider($object->getProviderName());
 
         $provider = $this->container->get($object->getProviderName());
 
-
-        //foreach ($this->mediaManager->getPool()->getFormatNamesByContext($object->getContext()) as $key => $format) {
         foreach ($provider->getFormats() as  $key => $format) {
             $photo[$key] = $provider->generatePublicUrl($object, $key);
         }
